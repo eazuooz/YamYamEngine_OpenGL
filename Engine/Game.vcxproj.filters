@@ -8,11 +8,14 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="01_Base">
-      <UniqueIdentifier>{f7f09ffe-e125-453e-8f1c-9e1813f03a9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Engine">
+    <Filter Include="Engine">
       <UniqueIdentifier>{5cd8b408-16cc-4d91-937e-c99c3cf4ceea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base">
+      <UniqueIdentifier>{7f89f39e-3072-463b-9924-0ff88a7793c2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Game">
+      <UniqueIdentifier>{c70bed52-4545-4b66-ba6d-24efa2f06f5b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -37,8 +40,11 @@
     <ClCompile Include="imGui\imgui_widgets.cpp">
       <Filter>ImGui</Filter>
     </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Engine\Base</Filter>
+    </ClCompile>
     <ClCompile Include="Game.cpp">
-      <Filter>02_Engine</Filter>
+      <Filter>Engine\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -60,14 +66,17 @@
     <ClInclude Include="imGui\imstb_truetype.h">
       <Filter>ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>02_Engine</Filter>
-    </ClInclude>
     <ClInclude Include="imGui\imconfig.h">
       <Filter>ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imgui_impl_opengl3.h">
       <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Engine\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Engine\Game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
