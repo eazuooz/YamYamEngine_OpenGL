@@ -17,6 +17,15 @@
     <Filter Include="Engine\Game">
       <UniqueIdentifier>{c70bed52-4545-4b66-ba6d-24efa2f06f5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\Contents">
+      <UniqueIdentifier>{45e5a913-9e72-42ab-8006-1d835532190b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component">
+      <UniqueIdentifier>{67144949-3165-452c-aa3a-8c51d18ff86c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Base">
+      <UniqueIdentifier>{e8bce230-95da-4599-8395-ea57b201398a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -44,6 +53,24 @@
       <Filter>Engine\Base</Filter>
     </ClCompile>
     <ClCompile Include="Game.cpp">
+      <Filter>Engine\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Main\Contents</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimSpriteComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="BGSpriteComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Engine\Component\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
       <Filter>Engine\Game</Filter>
     </ClCompile>
   </ItemGroup>
@@ -76,6 +103,24 @@
       <Filter>Engine\Base</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
+      <Filter>Engine\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Main\Contents</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimSpriteComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="BGSpriteComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Engine\Component\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
       <Filter>Engine\Game</Filter>
     </ClInclude>
   </ItemGroup>
