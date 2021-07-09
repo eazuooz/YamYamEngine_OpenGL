@@ -1,10 +1,12 @@
+
 #include "Game.h"
 #include "SDL/SDL_image.h"
 #include <algorithm>
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "Ship.h"
-#include "BGSpriteComponent.h"
+#include "Asteroid.h"
+#include "Random.h"
 
 Game::Game()
 	:mWindow(nullptr)
@@ -12,7 +14,7 @@ Game::Game()
 	, mIsRunning(true)
 	, mUpdatingActors(false)
 {
-	
+
 }
 
 bool Game::Initialize()
@@ -23,36 +25,27 @@ bool Game::Initialize()
 		return false;
 	}
 
-	mWindow = SDL_CreateWindow(
-		"Game Programming in C++ (Chapter 1)", 
-		100,	
-		100,	
-		1024,	
-		768,	
-		0		
-	);
+	mWindow = SDL_CreateWindow("Game Programming in C++ (Chapter 3)", 100, 100, 1024, 768, 0);
 	if (!mWindow)
 	{
 		SDL_Log("Failed to create window: %s", SDL_GetError());
 		return false;
 	}
-	
-	mRenderer = SDL_CreateRenderer(
-		mWindow, 
-		-1,		 
-		SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC
-	);
+
+	mRenderer = SDL_CreateRenderer(mWindow, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
 	if (!mRenderer)
 	{
 		SDL_Log("Failed to create renderer: %s", SDL_GetError());
 		return false;
 	}
-	
+
 	if (IMG_Init(IMG_INIT_PNG) == 0)
 	{
 		SDL_Log("Unable to initialize SDL_image: %s", SDL_GetError());
 		return false;
 	}
+
+	Random::Init();
 
 	LoadData();
 
@@ -78,24 +71,30 @@ void Game::ProcessInput()
 	{
 		switch (event.type)
 		{
-			// If we get an SDL_QUIT event, end loop
-			case SDL_QUIT:
-				mIsRunning = false;
-				break;
+		case SDL_QUIT:
+			mIsRunning = false;
+			break;
 		}
 	}
-	
-	const Uint8* state = SDL_GetKeyboardState(NULL);
-	if (state[SDL_SCANCODE_ESCAPE])
+
+	const Uint8* keyState = SDL_GetKeyboardState(NULL);
+	if (keyState[SDL_SCANCODE_ESCAPE])
 	{
 		mIsRunning = false;
 	}
-	
-	mShip->ProcessKeyboard(state);
+
+	mUpdatingActors = true;
+	for (auto actor : mActors)
+	{
+		actor->ProcessInput(keyState);
+	}
+	mUpdatingActors = false;
 }
 
 void Game::UpdateGame()
 {
+	// Compute delta time
+	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
 		;
 
@@ -105,7 +104,8 @@ void Game::UpdateGame()
 		deltaTime = 0.05f;
 	}
 	mTicksCount = SDL_GetTicks();
-	
+
+	// Update all actors
 	mUpdatingActors = true;
 	for (auto actor : mActors)
 	{
@@ -113,12 +113,14 @@ void Game::UpdateGame()
 	}
 	mUpdatingActors = false;
 
+	// Move any pending actors to mActors
 	for (auto pending : mPendingActors)
 	{
 		mActors.emplace_back(pending);
 	}
 	mPendingActors.clear();
 
+	// Add any dead actors to a temp vector
 	std::vector<Actor*> deadActors;
 	for (auto actor : mActors)
 	{
@@ -128,6 +130,7 @@ void Game::UpdateGame()
 		}
 	}
 
+	// Delete dead actors (which removes them from mActors)
 	for (auto actor : deadActors)
 	{
 		delete actor;
@@ -136,7 +139,7 @@ void Game::UpdateGame()
 
 void Game::GenerateOutput()
 {
-	SDL_SetRenderDrawColor(mRenderer, 0, 0, 0, 255);
+	SDL_SetRenderDrawColor(mRenderer, 220, 220, 220, 255);
 	SDL_RenderClear(mRenderer);
 
 	// Draw all sprite components
@@ -150,39 +153,29 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
+	// Create player's ship
 	mShip = new Ship(this);
-	mShip->SetPosition(Vector2(100.0f, 384.0f));
-	mShip->SetScale(1.5f);
+	mShip->SetPosition(Vector2(512.0f, 384.0f));
+	mShip->SetRotation(Math::PiOver2);
 
-	Actor* temp = new Actor(this);
-	temp->SetPosition(Vector2(512.0f, 384.0f));
-
-	BGSpriteComponent* bg = new BGSpriteComponent(temp);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
-	std::vector<SDL_Texture*> bgtexs = {
-		GetTexture("Assets/Farback01.png"),
-		GetTexture("Assets/Farback02.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-100.0f);
-
-	bg = new BGSpriteComponent(temp, 50);
-	bg->SetScreenSize(Vector2(1024.0f, 768.0f));
-	bgtexs = {
-		GetTexture("Assets/Stars.png"),
-		GetTexture("Assets/Stars.png")
-	};
-	bg->SetBGTextures(bgtexs);
-	bg->SetScrollSpeed(-200.0f);
+	// Create asteroids
+	const int numAsteroids = 20;
+	for (int i = 0; i < numAsteroids; i++)
+	{
+		new Asteroid(this);
+	}
 }
 
 void Game::UnloadData()
 {
+	// Delete actors
+	// Because ~Actor calls RemoveActor, have to use a different style loop
 	while (!mActors.empty())
 	{
 		delete mActors.back();
 	}
 
+	// Destroy textures
 	for (auto i : mTextures)
 	{
 		SDL_DestroyTexture(i.second);
@@ -193,7 +186,7 @@ void Game::UnloadData()
 SDL_Texture* Game::GetTexture(const std::string& fileName)
 {
 	SDL_Texture* tex = nullptr;
-
+	// Is the texture already in the map?
 	auto iter = mTextures.find(fileName);
 	if (iter != mTextures.end())
 	{
@@ -201,6 +194,7 @@ SDL_Texture* Game::GetTexture(const std::string& fileName)
 	}
 	else
 	{
+		// Load from file
 		SDL_Surface* surf = IMG_Load(fileName.c_str());
 		if (!surf)
 		{
@@ -208,6 +202,7 @@ SDL_Texture* Game::GetTexture(const std::string& fileName)
 			return nullptr;
 		}
 
+		// Create texture from surface
 		tex = SDL_CreateTextureFromSurface(mRenderer, surf);
 		SDL_FreeSurface(surf);
 		if (!tex)
@@ -218,8 +213,22 @@ SDL_Texture* Game::GetTexture(const std::string& fileName)
 
 		mTextures.emplace(fileName.c_str(), tex);
 	}
-
 	return tex;
+}
+
+void Game::AddAsteroid(Asteroid* ast)
+{
+	mAsteroids.emplace_back(ast);
+}
+
+void Game::RemoveAsteroid(Asteroid* ast)
+{
+	auto iter = std::find(mAsteroids.begin(),
+		mAsteroids.end(), ast);
+	if (iter != mAsteroids.end())
+	{
+		mAsteroids.erase(iter);
+	}
 }
 
 void Game::Shutdown()
@@ -233,6 +242,7 @@ void Game::Shutdown()
 
 void Game::AddActor(Actor* actor)
 {
+	// If we're updating actors, need to add to pending
 	if (mUpdatingActors)
 	{
 		mPendingActors.emplace_back(actor);
@@ -266,6 +276,8 @@ void Game::RemoveActor(Actor* actor)
 
 void Game::AddSprite(SpriteComponent* sprite)
 {
+	// Find the insertion point in the sorted vector
+	// (The first element with a higher draw order than me)
 	int myDrawOrder = sprite->GetDrawOrder();
 	auto iter = mSprites.begin();
 	for (;
@@ -278,13 +290,13 @@ void Game::AddSprite(SpriteComponent* sprite)
 		}
 	}
 
+	// Inserts element before position of iterator
 	mSprites.insert(iter, sprite);
 }
 
 void Game::RemoveSprite(SpriteComponent* sprite)
 {
+	// (We can't swap because it ruins ordering)
 	auto iter = std::find(mSprites.begin(), mSprites.end(), sprite);
 	mSprites.erase(iter);
 }
-
-

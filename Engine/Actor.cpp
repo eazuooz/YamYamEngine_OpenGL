@@ -45,12 +45,31 @@ void Actor::UpdateActor(float deltaTime)
 {
 }
 
+void Actor::ProcessInput(const uint8_t* keyState)
+{
+	if (mState == EActive)
+	{
+		// First process input for components
+		for (auto comp : mComponents)
+		{
+			comp->ProcessInput(keyState);
+		}
+
+		ActorInput(keyState);
+	}
+}
+
+void Actor::ActorInput(const uint8_t* keyState)
+{
+}
+
 void Actor::AddComponent(Component* component)
 {
+	// Find the insertion point in the sorted vector
+	// (The first element with a order higher than me)
 	int myOrder = component->GetUpdateOrder();
 	auto iter = mComponents.begin();
-
-	for (; 
+	for (;
 		iter != mComponents.end();
 		++iter)
 	{
@@ -60,6 +79,7 @@ void Actor::AddComponent(Component* component)
 		}
 	}
 
+	// Inserts element before position of iterator
 	mComponents.insert(iter, component);
 }
 

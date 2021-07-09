@@ -26,6 +26,12 @@
     <Filter Include="Engine\Component\Base">
       <UniqueIdentifier>{e8bce230-95da-4599-8395-ea57b201398a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Main\Contents\2D">
+      <UniqueIdentifier>{c8b35ae6-86c4-4024-94e5-713e9140ce8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Main\Contents\3D">
+      <UniqueIdentifier>{91c47c38-b299-4a8c-a7ac-4df74c76f151}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -55,9 +61,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>Engine\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Ship.cpp">
-      <Filter>Main\Contents</Filter>
-    </ClCompile>
     <ClCompile Include="AnimSpriteComponent.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
@@ -72,6 +75,27 @@
     </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Engine\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Engine\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Main\Contents\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Main\Contents\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CircleComponent.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -105,9 +129,6 @@
     <ClInclude Include="Game.h">
       <Filter>Engine\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>Main\Contents</Filter>
-    </ClInclude>
     <ClInclude Include="AnimSpriteComponent.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
@@ -123,5 +144,22 @@
     <ClInclude Include="Actor.h">
       <Filter>Engine\Game</Filter>
     </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Engine\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Main\Contents\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Main\Contents\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CircleComponent.h" />
+    <ClInclude Include="Asteroid.h" />
   </ItemGroup>
 </Project>

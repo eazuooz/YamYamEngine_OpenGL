@@ -10,20 +10,20 @@ public:
 	{
 		EActive,
 		EPaused,
-		EDead,
+		EDead
 	};
 
 	Actor(class Game* game);
 	virtual ~Actor();
 
-	// Update function called from Game ( not overridable )
 	void Update(float deltaTime);
-	// Update all the components attached to the actor ( not overridable )
 	void UpdateComponents(float deltaTime);
-	// Any actor specific update code ( not overridable )
 	virtual void UpdateActor(float deltaTime);
 
-	// Getters / Setters
+	void ProcessInput(const uint8_t* keyState);
+	virtual void ActorInput(const uint8_t* keyState);
+
+	// Getters/setters
 	const Vector2& GetPosition() const { return mPosition; }
 	void SetPosition(const Vector2& pos) { mPosition = pos; }
 	float GetScale() const { return mScale; }
@@ -31,17 +31,19 @@ public:
 	float GetRotation() const { return mRotation; }
 	void SetRotation(float rotation) { mRotation = rotation; }
 
+	Vector2 GetForward() const { return Vector2(Math::Cos(mRotation), -Math::Sin(mRotation)); }
+
 	State GetState() const { return mState; }
 	void SetState(State state) { mState = state; }
 
 	class Game* GetGame() { return mGame; }
 
+
 	// Add/remove components
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
-
 private:
-	// Actor's State
+	// Actor's state
 	State mState;
 
 	// Transform
