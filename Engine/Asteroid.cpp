@@ -15,7 +15,9 @@ Asteroid::Asteroid(Game* game)
 		Vector2(1024.0f, 768.0f));
 	SetPosition(randPos);
 
-	SetRotation(Random::GetFloatRange(0.0f, Math::TwoPi));
+	rotation
+		= Random::GetFloatRange(0.0f, Math::TwoPi);
+	SetRotation(rotation);
 
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);
@@ -36,4 +38,15 @@ Asteroid::Asteroid(Game* game)
 Asteroid::~Asteroid()
 {
 	GetGame()->RemoveAsteroid(this);
+}
+
+void Asteroid::UpdateActor(float deltaTime)
+{
+	//float rot = GetRotation();
+	//rot = rot * deltaTime;
+	//SetRotation(rot);
+
+	//float rot = mOwner->GetRotation();
+	//rot += mAngularSpeed * deltaTime;
+	//etRotation(rot);
 }

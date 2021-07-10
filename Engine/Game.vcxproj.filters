@@ -92,10 +92,10 @@
       <Filter>Main\Contents\2D</Filter>
     </ClCompile>
     <ClCompile Include="CircleComponent.cpp">
-      <Filter>Main</Filter>
+      <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="Asteroid.cpp">
-      <Filter>Main</Filter>
+      <Filter>Main\Contents\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -159,7 +159,11 @@
     <ClInclude Include="Ship.h">
       <Filter>Main\Contents\2D</Filter>
     </ClInclude>
-    <ClInclude Include="CircleComponent.h" />
-    <ClInclude Include="Asteroid.h" />
+    <ClInclude Include="CircleComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Main\Contents\2D</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
