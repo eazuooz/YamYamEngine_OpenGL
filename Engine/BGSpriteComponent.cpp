@@ -1,5 +1,9 @@
 #include "BGSpriteComponent.h"
+#include "Texture.h"
+#include "Shader.h"
 #include "Actor.h"
+#include "Game.h"
+
 
 BGSpriteComponent::BGSpriteComponent(Actor* owner, int drawOrder)
 	:SpriteComponent(owner, drawOrder)
@@ -21,24 +25,20 @@ void BGSpriteComponent::Update(float deltaTime)
 	}
 }
 
-void BGSpriteComponent::Draw(SDL_Renderer* renderer)
+void BGSpriteComponent::Draw(Shader* shader)
 {
 	for (auto& bg : mBGTextures)
 	{
-		SDL_Rect r;
-		// Assume screen size dimensions
-		r.w = static_cast<int>(mScreenSize.x);
-		r.h = static_cast<int>(mScreenSize.y);
-		// Center the rectangle around the position of the owner
-		r.x = static_cast<int>(mOwner->GetPosition().x - r.w / 2 + bg.mOffset.x);
-		r.y = static_cast<int>(mOwner->GetPosition().y - r.h / 2 + bg.mOffset.y);
+		Matrix4 scaleMat = Matrix4::CreateScale(
+			static_cast<float>(mTexWidth),
+			static_cast<float>(mTexHeight),
+			1.0f);
 
-		// Draw this background
-		SDL_RenderCopy(renderer,
-			bg.mTexture,
-			nullptr,
-			&r
-		);
+		Matrix4 world = scaleMat * mOwner->GetWorldTransform();
+
+		shader->SetMatrixUniform("uWorldTransform", world);
+		mTexture->SetActive();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 	}
 }
 

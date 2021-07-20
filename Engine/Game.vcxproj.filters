@@ -32,28 +32,19 @@
     <Filter Include="Main\Contents\3D">
       <UniqueIdentifier>{91c47c38-b299-4a8c-a7ac-4df74c76f151}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\OpenGL">
+      <UniqueIdentifier>{7fb57423-e798-4ea7-92da-3e4563e673d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\AI">
+      <UniqueIdentifier>{a93ce350-3e09-4e2a-8a66-bca007fde86a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\OpenGL\Shader">
+      <UniqueIdentifier>{6493ef47-8030-48bc-aa8d-b757a8c5f870}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="imGui\imgui.cpp">
-      <Filter>ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="imGui\imgui_draw.cpp">
-      <Filter>ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="imGui\imgui_impl_opengl3.cpp">
-      <Filter>ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="imGui\imgui_impl_sdl.cpp">
-      <Filter>ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="imGui\imgui_tables.cpp">
-      <Filter>ImGui</Filter>
-    </ClCompile>
-    <ClCompile Include="imGui\imgui_widgets.cpp">
-      <Filter>ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Engine\Base</Filter>
@@ -97,32 +88,44 @@
     <ClCompile Include="Asteroid.cpp">
       <Filter>Main\Contents\2D</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Engine\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Engine\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="VertexArray.cpp">
+      <Filter>Engine\OpenGL</Filter>
+    </ClCompile>
+    <ClCompile Include="AIComponent.cpp">
+      <Filter>Engine\Component\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="AIState.cpp">
+      <Filter>Engine\Component\AI</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui_impl_opengl3.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui_impl_sdl.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="imGui\imgui.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="imGui\imgui_impl_sdl.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="imGui\imgui_internal.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="imGui\imstb_rectpack.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="imGui\imstb_textedit.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="imGui\imstb_truetype.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="imGui\imconfig.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
-    <ClInclude Include="imGui\imgui_impl_opengl3.h">
-      <Filter>ImGui</Filter>
-    </ClInclude>
     <ClInclude Include="Math.h">
       <Filter>Engine\Base</Filter>
     </ClInclude>
@@ -165,5 +168,61 @@
     <ClInclude Include="Asteroid.h">
       <Filter>Main\Contents\2D</Filter>
     </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Engine\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Engine\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="VertexArray.h">
+      <Filter>Engine\OpenGL</Filter>
+    </ClInclude>
+    <ClInclude Include="AIState.h">
+      <Filter>Engine\Component\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="AIComponent.h">
+      <Filter>Engine\Component\AI</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imgui_impl_opengl3.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imgui_impl_sdl.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Shaders\Basic.frag">
+      <Filter>Engine\OpenGL\Shader</Filter>
+    </None>
+    <None Include="Shaders\Basic.vert">
+      <Filter>Engine\OpenGL\Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.frag">
+      <Filter>Engine\OpenGL\Shader</Filter>
+    </None>
+    <None Include="Shaders\Sprite.vert">
+      <Filter>Engine\OpenGL\Shader</Filter>
+    </None>
+    <None Include="Shaders\Transform.vert">
+      <Filter>Engine\OpenGL\Shader</Filter>
+    </None>
   </ItemGroup>
 </Project>

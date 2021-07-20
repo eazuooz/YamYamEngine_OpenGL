@@ -25,7 +25,7 @@ void AnimSpriteComponent::Update(float deltaTime)
 	}
 }
 
-void AnimSpriteComponent::SetAnimTextures(const std::vector<SDL_Texture*>& textures)
+void AnimSpriteComponent::SetAnimTextures(const std::vector<Texture*>& textures)
 {
 	mAnimTextures = textures;
 	if (mAnimTextures.size() > 0)

@@ -1,4 +1,6 @@
 #include "SpriteComponent.h"
+#include "Texture.h"
+#include "Shader.h"
 #include "Actor.h"
 #include "Game.h"
 
@@ -17,29 +19,27 @@ SpriteComponent::~SpriteComponent()
 	mOwner->GetGame()->RemoveSprite(this);
 }
 
-void SpriteComponent::Draw(SDL_Renderer* renderer)
+void SpriteComponent::Draw(Shader* shader)
 {
 	if (mTexture)
 	{
-		SDL_Rect r;
+		Matrix4 scaleMat = Matrix4::CreateScale(
+			static_cast<float>(mTexWidth),
+			static_cast<float>(mTexHeight),
+			1.0f);
 
-		r.w = static_cast<int>(mTexWidth * mOwner->GetScale());
-		r.h = static_cast<int>(mTexHeight * mOwner->GetScale());
-		r.x = static_cast<int>(mOwner->GetPosition().x - r.w / 2);
-		r.y = static_cast<int>(mOwner->GetPosition().y - r.h / 2);
+		Matrix4 world = scaleMat * mOwner->GetWorldTransform();
 
-		SDL_RenderCopyEx(renderer,
-			mTexture,
-			nullptr,
-			&r,
-			-Math::ToDegrees(mOwner->GetRotation()),
-			nullptr,
-			SDL_FLIP_NONE);
+		shader->SetMatrixUniform("uWorldTransform", world);
+		mTexture->SetActive();
+		glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, nullptr);
 	}
 }
 
-void SpriteComponent::SetTexture(SDL_Texture* texture)
+void SpriteComponent::SetTexture(Texture* texture)
 {
 	mTexture = texture;
-	SDL_QueryTexture(texture, nullptr, nullptr, &mTexWidth, &mTexHeight);
+	// Set width/height
+	mTexWidth = texture->GetWidth();
+	mTexHeight = texture->GetHeight();
 }
