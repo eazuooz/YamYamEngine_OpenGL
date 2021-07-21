@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="ImGui">
-      <UniqueIdentifier>{99227801-8b3b-4723-9e75-cd9dea354136}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Main">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
@@ -17,20 +14,11 @@
     <Filter Include="Engine\Game">
       <UniqueIdentifier>{c70bed52-4545-4b66-ba6d-24efa2f06f5b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Main\Contents">
-      <UniqueIdentifier>{45e5a913-9e72-42ab-8006-1d835532190b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component">
       <UniqueIdentifier>{67144949-3165-452c-aa3a-8c51d18ff86c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Component\Base">
       <UniqueIdentifier>{e8bce230-95da-4599-8395-ea57b201398a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main\Contents\2D">
-      <UniqueIdentifier>{c8b35ae6-86c4-4024-94e5-713e9140ce8c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Main\Contents\3D">
-      <UniqueIdentifier>{91c47c38-b299-4a8c-a7ac-4df74c76f151}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\OpenGL">
       <UniqueIdentifier>{7fb57423-e798-4ea7-92da-3e4563e673d8}</UniqueIdentifier>
@@ -40,6 +28,21 @@
     </Filter>
     <Filter Include="Engine\OpenGL\Shader">
       <UniqueIdentifier>{6493ef47-8030-48bc-aa8d-b757a8c5f870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gui">
+      <UniqueIdentifier>{af79e220-338d-4d80-802c-bd15d460881b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Gui\ImGui">
+      <UniqueIdentifier>{99227801-8b3b-4723-9e75-cd9dea354136}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents">
+      <UniqueIdentifier>{45e5a913-9e72-42ab-8006-1d835532190b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\2D">
+      <UniqueIdentifier>{c8b35ae6-86c4-4024-94e5-713e9140ce8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\3D">
+      <UniqueIdentifier>{91c47c38-b299-4a8c-a7ac-4df74c76f151}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -76,17 +79,8 @@
     <ClCompile Include="InputComponent.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
-    <ClCompile Include="Laser.cpp">
-      <Filter>Main\Contents\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Ship.cpp">
-      <Filter>Main\Contents\2D</Filter>
-    </ClCompile>
     <ClCompile Include="CircleComponent.cpp">
       <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Asteroid.cpp">
-      <Filter>Main\Contents\2D</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Engine\OpenGL</Filter>
@@ -104,25 +98,37 @@
       <Filter>Engine\Component\AI</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui_demo.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui_draw.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui_impl_opengl3.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui_impl_sdl.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui_tables.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui_widgets.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="Gui.cpp">
+      <Filter>Gui</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
+      <Filter>Contents\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Laser.cpp">
+      <Filter>Contents\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Ship.cpp">
+      <Filter>Contents\2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,17 +162,8 @@
     <ClInclude Include="InputComponent.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
-    <ClInclude Include="Laser.h">
-      <Filter>Main\Contents\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>Main\Contents\2D</Filter>
-    </ClInclude>
     <ClInclude Include="CircleComponent.h">
       <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Asteroid.h">
-      <Filter>Main\Contents\2D</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Engine\OpenGL</Filter>
@@ -184,28 +181,40 @@
       <Filter>Engine\Component\AI</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imconfig.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imgui.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imgui_impl_opengl3.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imgui_impl_sdl.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imgui_internal.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imstb_rectpack.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imstb_textedit.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imstb_truetype.h">
-      <Filter>ImGui</Filter>
+      <Filter>Gui\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="Gui.h">
+      <Filter>Gui</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
+      <Filter>Contents\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Laser.h">
+      <Filter>Contents\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Ship.h">
+      <Filter>Contents\2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

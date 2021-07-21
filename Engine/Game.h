@@ -1,4 +1,8 @@
 #pragma once
+#include "ImGui/imgui.h"
+#include "ImGui/imgui_impl_sdl.h"
+#include "ImGui/imgui_impl_opengl3.h"
+
 #include "SDL/SDL.h"
 #include <unordered_map>
 #include <string>
@@ -34,6 +38,8 @@ private:
 	void CreateSpriteVerts();
 	void LoadData();
 	void UnloadData();
+
+	ImGuiIO* io;
 
 	// Map of textures loaded
 	std::unordered_map<std::string, class Texture*> mTextures;
