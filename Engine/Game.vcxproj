@@ -28,7 +28,7 @@
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Gui.cpp" />
+    <ClCompile Include="Editor.cpp" />
     <ClCompile Include="imGui\imgui.cpp" />
     <ClCompile Include="imGui\imgui_demo.cpp" />
     <ClCompile Include="imGui\imgui_draw.cpp" />
@@ -58,7 +58,7 @@
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="Gui.h" />
+    <ClInclude Include="Editor.h" />
     <ClInclude Include="imGui\imconfig.h" />
     <ClInclude Include="imGui\imgui.h" />
     <ClInclude Include="imGui\imgui_impl_opengl3.h" />

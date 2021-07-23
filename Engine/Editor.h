@@ -4,13 +4,13 @@
 #include "ImGui/imgui_impl_opengl3.h"
 
 
-class Gui
+class Editor
 {
 public:
-	Gui() {}
-	~Gui() {}
+	Editor() {}
+	~Editor() {}
 
-	static InitGui();
+	static void InitGui();
 
 private:
 	ImGuiIO* io;
