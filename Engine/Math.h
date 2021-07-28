@@ -12,7 +12,7 @@ namespace Math
 	const float Infinity = std::numeric_limits<float>::infinity();
 	const float NegInfinity = -std::numeric_limits<float>::infinity();
 
-	inline float ToRadian(float degree)
+	inline float ToRadians(float degree)
 	{
 		return degree * Pi / 180.0f;
 	}

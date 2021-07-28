@@ -4,6 +4,7 @@
 #include "Game.h"
 #include "CircleComponent.h"
 #include "Asteroid.h"
+#include "Renderer.h"
 
 Laser::Laser(Game* game)
 	:Actor(game)
@@ -11,7 +12,7 @@ Laser::Laser(Game* game)
 {
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);
-	sc->SetTexture(game->GetTexture("Assets/Laser.png"));
+	sc->SetTexture(game->GetRenderer()->GetTexture("Assets/Laser.png"));
 
 	// Create a move component, and set a forward speed
 	MoveComponent* mc = new MoveComponent(this);
@@ -24,25 +25,25 @@ Laser::Laser(Game* game)
 
 void Laser::UpdateActor(float deltaTime)
 {
-	// If we run out of time, laser is dead
-	mDeathTimer -= deltaTime;
-	if (mDeathTimer <= 0.0f)
-	{
-		SetState(EDead);
-	}
-	else
-	{
-		// Do we intersect with an asteroid?
-		for (auto ast : GetGame()->GetAsteroids())
-		{
-			if (Intersect(*mCircle, *(ast->GetCircle())))
-			{
-				// The first asteroid we intersect with,
-				// set ourselves and the asteroid to dead
-				SetState(EDead);
-				ast->SetState(EDead);
-				break;
-			}
-		}
-	}
+	//// If we run out of time, laser is dead
+	//mDeathTimer -= deltaTime;
+	//if (mDeathTimer <= 0.0f)
+	//{
+	//	SetState(EDead);
+	//}
+	//else
+	//{
+	//	// Do we intersect with an asteroid?
+	//	for (auto ast : GetGame()->GetAsteroids())
+	//	{
+	//		if (Intersect(*mCircle, *(ast->GetCircle())))
+	//		{
+	//			// The first asteroid we intersect with,
+	//			// set ourselves and the asteroid to dead
+	//			SetState(EDead);
+	//			ast->SetState(EDead);
+	//			break;
+	//		}
+	//	}
+	//}
 }

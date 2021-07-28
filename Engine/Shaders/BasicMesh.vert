@@ -12,12 +12,21 @@
 // This should correspond to the data stored
 // for each vertex in the vertex buffer.
 // For now, just a position.
-in vec3 inPosition;
+
+
+uniform mat4 uWorldTrasnform;
+uniform mat4 uViewProj;
+
+layout(location = 0) in vec3 inPosition;
+layout(location = 1) in vec3 inNormal;
+layout(location = 2) in vec2 inTexCoord;
+
+out vec2 fragTexCoord;
 
 void main()
 {
-	// The vertex shader needs to output a 4D
-	// coordinate.
-	// For now set the 4th coordinate to 1.0
-	gl_Position = vec4(inPosition, 1.0);
+	vec4 pos = vec4(inPosition, 1.0);
+	gl_Position = pos * uWorldTrasnform * uViewProj;
+
+	fragTexCoord = inTexCoord;
 }

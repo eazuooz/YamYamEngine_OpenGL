@@ -15,8 +15,10 @@ void MoveComponent::Update(float deltaTime)
 	{
 		Quaternion rot = mOwner->GetRotation();
 		float angle = mAngularSpeed * deltaTime;
-
+		// Create quaternion for incremental rotation
+		// (Rotate about up axis)
 		Quaternion inc(Vector3::UnitZ, angle);
+		// Concatenate old and new quaternion
 		rot = Quaternion::Concatenate(rot, inc);
 		mOwner->SetRotation(rot);
 	}
@@ -25,12 +27,6 @@ void MoveComponent::Update(float deltaTime)
 	{
 		Vector3 pos = mOwner->GetPosition();
 		pos += mOwner->GetForward() * mForwardSpeed * deltaTime;
-
-		// Screen wrapping (for asteroids)
-		if (pos.x < -512.0f) { pos.x = 510.0f; }
-		else if (pos.x > 512.0f) { pos.x = -510.0f; }
-		if (pos.y < -384.0f) { pos.y = 382.0f; }
-		else if (pos.y > 384.0f) { pos.y = -382.0f; }
 		mOwner->SetPosition(pos);
 	}
 }

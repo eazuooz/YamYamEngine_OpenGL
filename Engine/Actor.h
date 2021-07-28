@@ -1,3 +1,11 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #pragma once
 #include <vector>
 #include "Math.h"
@@ -33,8 +41,8 @@ public:
 	void SetPosition(const Vector3& pos) { mPosition = pos; mRecomputeWorldTransform = true; }
 	float GetScale() const { return mScale; }
 	void SetScale(float scale) { mScale = scale;  mRecomputeWorldTransform = true; }
-	Quaternion GetRotation() const { return mRotation; }
-	void SetRotation(Quaternion rotation) { mRotation = rotation;  mRecomputeWorldTransform = true; }
+	const Quaternion& GetRotation() const { return mRotation; }
+	void SetRotation(const Quaternion& rotation) { mRotation = rotation;  mRecomputeWorldTransform = true; }
 
 	void ComputeWorldTransform();
 	const Matrix4& GetWorldTransform() const { return mWorldTransform; }

@@ -20,14 +20,8 @@
     <Filter Include="Engine\Component\Base">
       <UniqueIdentifier>{e8bce230-95da-4599-8395-ea57b201398a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\OpenGL">
-      <UniqueIdentifier>{7fb57423-e798-4ea7-92da-3e4563e673d8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component\AI">
       <UniqueIdentifier>{a93ce350-3e09-4e2a-8a66-bca007fde86a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\OpenGL\Shader">
-      <UniqueIdentifier>{6493ef47-8030-48bc-aa8d-b757a8c5f870}</UniqueIdentifier>
     </Filter>
     <Filter Include="Contents">
       <UniqueIdentifier>{45e5a913-9e72-42ab-8006-1d835532190b}</UniqueIdentifier>
@@ -47,25 +41,34 @@
     <Filter Include="Editor\ImGuizmo">
       <UniqueIdentifier>{68178c53-aecd-43f6-aa71-2ac871d8a399}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Collision">
+      <UniqueIdentifier>{8bd3fe4c-c6b3-4898-98e5-30a4232eabf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\Logic">
+      <UniqueIdentifier>{a1e565c6-ebb7-4eb0-bd40-93a974bcf287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Mathmetics">
+      <UniqueIdentifier>{9527bc66-9de2-4151-a8a2-a25eb781aa0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics">
+      <UniqueIdentifier>{7fb57423-e798-4ea7-92da-3e4563e673d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Graphics\Shader">
+      <UniqueIdentifier>{6493ef47-8030-48bc-aa8d-b757a8c5f870}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\3D">
+      <UniqueIdentifier>{7e56ee63-20ad-4cb1-ae86-35e4971c26f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Component\2D">
+      <UniqueIdentifier>{bd165832-6fdb-494b-a3d5-a3ec090aa57c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Math.cpp">
-      <Filter>Engine\Base</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Engine\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="AnimSpriteComponent.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="BGSpriteComponent.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="SpriteComponent.cpp">
-      <Filter>Engine\Component</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Engine\Component\Base</Filter>
@@ -73,26 +76,14 @@
     <ClCompile Include="Actor.cpp">
       <Filter>Engine\Game</Filter>
     </ClCompile>
-    <ClCompile Include="Random.cpp">
-      <Filter>Engine\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="MoveComponent.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="InputComponent.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleComponent.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>Engine\OpenGL</Filter>
+      <Filter>Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Engine\OpenGL</Filter>
+      <Filter>Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="VertexArray.cpp">
-      <Filter>Engine\OpenGL</Filter>
+      <Filter>Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="AIComponent.cpp">
       <Filter>Engine\Component\AI</Filter>
@@ -133,22 +124,49 @@
     <ClCompile Include="Editor.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
+    <ClCompile Include="CircleComponent.cpp">
+      <Filter>Engine\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimSpriteComponent.cpp">
+      <Filter>Engine\Component\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteComponent.cpp">
+      <Filter>Engine\Component\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="BGSpriteComponent.cpp">
+      <Filter>Engine\Component\2D</Filter>
+    </ClCompile>
+    <ClCompile Include="InputComponent.cpp">
+      <Filter>Engine\Component\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveComponent.cpp">
+      <Filter>Engine\Component\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="Math.cpp">
+      <Filter>Engine\Mathmetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Random.cpp">
+      <Filter>Engine\Mathmetics</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Renderer.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneActor.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraActor.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Math.h">
-      <Filter>Engine\Base</Filter>
-    </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Engine\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="AnimSpriteComponent.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="BGSpriteComponent.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteComponent.h">
-      <Filter>Engine\Component</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Engine\Component\Base</Filter>
@@ -156,26 +174,14 @@
     <ClInclude Include="Actor.h">
       <Filter>Engine\Game</Filter>
     </ClInclude>
-    <ClInclude Include="Random.h">
-      <Filter>Engine\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="MoveComponent.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="InputComponent.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleComponent.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>Engine\OpenGL</Filter>
+      <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Engine\OpenGL</Filter>
+      <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="VertexArray.h">
-      <Filter>Engine\OpenGL</Filter>
+      <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="AIState.h">
       <Filter>Engine\Component\AI</Filter>
@@ -219,22 +225,52 @@
     <ClInclude Include="Editor.h">
       <Filter>Editor</Filter>
     </ClInclude>
+    <ClInclude Include="CircleComponent.h">
+      <Filter>Engine\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimSpriteComponent.h">
+      <Filter>Engine\Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Engine\Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="BGSpriteComponent.h">
+      <Filter>Engine\Component\2D</Filter>
+    </ClInclude>
+    <ClInclude Include="InputComponent.h">
+      <Filter>Engine\Component\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveComponent.h">
+      <Filter>Engine\Component\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Random.h">
+      <Filter>Engine\Mathmetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Math.h">
+      <Filter>Engine\Mathmetics</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Renderer.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshComponent.h" />
+    <ClInclude Include="PlaneActor.h" />
+    <ClInclude Include="CameraActor.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Shaders\Basic.frag">
-      <Filter>Engine\OpenGL\Shader</Filter>
+    <None Include="Shaders\BasicMesh.frag">
+      <Filter>Engine\Graphics\Shader</Filter>
     </None>
-    <None Include="Shaders\Basic.vert">
-      <Filter>Engine\OpenGL\Shader</Filter>
+    <None Include="Shaders\BasicMesh.vert">
+      <Filter>Engine\Graphics\Shader</Filter>
     </None>
     <None Include="Shaders\Sprite.frag">
-      <Filter>Engine\OpenGL\Shader</Filter>
+      <Filter>Engine\Graphics\Shader</Filter>
     </None>
     <None Include="Shaders\Sprite.vert">
-      <Filter>Engine\OpenGL\Shader</Filter>
-    </None>
-    <None Include="Shaders\Transform.vert">
-      <Filter>Engine\OpenGL\Shader</Filter>
+      <Filter>Engine\Graphics\Shader</Filter>
     </None>
   </ItemGroup>
 </Project>
