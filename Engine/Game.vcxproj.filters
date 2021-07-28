@@ -154,14 +154,14 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="MeshComponent.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="PlaneActor.cpp">
       <Filter>Main</Filter>
     </ClCompile>
+    <ClCompile Include="MeshComponent.cpp">
+      <Filter>Engine\Component\3D</Filter>
+    </ClCompile>
     <ClCompile Include="CameraActor.cpp">
-      <Filter>Main</Filter>
+      <Filter>Engine\Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -255,9 +255,13 @@
     <ClInclude Include="Renderer.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="PlaneActor.h" />
-    <ClInclude Include="CameraActor.h" />
+    <ClInclude Include="MeshComponent.h">
+      <Filter>Engine\Component\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraActor.h">
+      <Filter>Engine\Game</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag">
@@ -270,6 +274,12 @@
       <Filter>Engine\Graphics\Shader</Filter>
     </None>
     <None Include="Shaders\Sprite.vert">
+      <Filter>Engine\Graphics\Shader</Filter>
+    </None>
+    <None Include="Shaders\Phong.frag">
+      <Filter>Engine\Graphics\Shader</Filter>
+    </None>
+    <None Include="Shaders\Phong.vert">
       <Filter>Engine\Graphics\Shader</Filter>
     </None>
   </ItemGroup>

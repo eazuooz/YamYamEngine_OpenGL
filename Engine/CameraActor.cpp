@@ -26,6 +26,7 @@ void CameraActor::UpdateActor(float deltaTime)
 void CameraActor::ActorInput(const uint8_t* keys)
 {
 	float forwardSpeed = 0.0f;
+	float horizenSpeed = 0.0f;
 	float angularSpeed = 0.0f;
 	// wasd movement
 	if (keys[SDL_SCANCODE_W])
@@ -38,13 +39,23 @@ void CameraActor::ActorInput(const uint8_t* keys)
 	}
 	if (keys[SDL_SCANCODE_A])
 	{
-		angularSpeed -= Math::TwoPi;
+		horizenSpeed += 300.0f;
 	}
 	if (keys[SDL_SCANCODE_D])
+	{
+		horizenSpeed -= 300.0f;
+	}
+
+	if (keys[SDL_SCANCODE_Q])
+	{
+		angularSpeed -= Math::TwoPi;
+	}
+	if (keys[SDL_SCANCODE_E])
 	{
 		angularSpeed += Math::TwoPi;
 	}
 
 	mMoveComp->SetForwardSpeed(forwardSpeed);
+	mMoveComp->SetHorizonSpeed(horizenSpeed);
 	mMoveComp->SetAngularSpeed(angularSpeed);
 }

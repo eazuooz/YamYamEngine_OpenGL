@@ -48,6 +48,7 @@ public:
 	const Matrix4& GetWorldTransform() const { return mWorldTransform; }
 
 	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, mRotation); }
+	Vector3 GetLeft() const { return Vector3::Transform(Vector3::UnitY, mRotation); }
 
 	State GetState() const { return mState; }
 	void SetState(State state) { mState = state; }

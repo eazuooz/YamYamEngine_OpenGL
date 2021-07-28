@@ -24,23 +24,18 @@ void MeshComponent::Draw(Shader* shader)
 {
 	if (mMesh)
 	{
-		shader->SetMatrixUniform("uWorldTrasnform",
+		shader->SetMatrixUniform("uWorldTransform",
 			mOwner->GetWorldTransform());
-
 		shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
-
 		Texture* t = mMesh->GetTexture(mTextureIndex);
 		if (t)
 		{
 			t->SetActive();
 		}
-
 		VertexArray* va = mMesh->GetVertexArray();
 		va->SetActive();
-
 		glDrawElements(GL_TRIANGLES, va->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 	}
-
 }
 
 void MeshComponent::Update(float deltaTime)

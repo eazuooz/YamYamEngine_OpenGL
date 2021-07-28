@@ -27,6 +27,14 @@ void MoveComponent::Update(float deltaTime)
 	{
 		Vector3 pos = mOwner->GetPosition();
 		pos += mOwner->GetForward() * mForwardSpeed * deltaTime;
+
+		mOwner->SetPosition(pos);
+	}
+
+	if (!Math::NearZero(mHorizonSpeed))
+	{
+		Vector3 pos = mOwner->GetPosition();
+		pos += mOwner->GetLeft() * mHorizonSpeed * deltaTime;
 		mOwner->SetPosition(pos);
 	}
 }
