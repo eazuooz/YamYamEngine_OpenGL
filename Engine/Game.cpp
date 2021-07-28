@@ -324,7 +324,9 @@ void Game::LoadData()
 {
 	// Create player's ship
 	mShip = new Ship(this);
-	mShip->SetRotation(Math::PiOver2);
+	
+	Quaternion inc(Vector3::UnitZ, Random::GetFloatRange(0.0f, Math::PiOver2));
+	mShip->SetRotation(inc);
 
 	// Create asteroids
 	const int numAsteroids = 20;

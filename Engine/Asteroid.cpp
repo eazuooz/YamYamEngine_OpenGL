@@ -11,11 +11,12 @@ Asteroid::Asteroid(Game* game)
 	, mCircle(nullptr)
 {
 	// Initialize to random position/orientation
-	Vector2 randPos = Random::GetVector(Vector2(-512.0f, -384.0f),
-		Vector2(512.0f, 384.0f));
+	Vector3 randPos = Random::GetVector(Vector3(-512.0f, -384.0f),
+		Vector3(512.0f, 384.0f));
 	SetPosition(randPos);
 
-	SetRotation(Random::GetFloatRange(0.0f, Math::TwoPi));
+	Quaternion inc(Vector3::UnitZ, Random::GetFloatRange(0.0f, Math::TwoPi));
+	SetRotation(inc);
 
 	// Create a sprite component
 	SpriteComponent* sc = new SpriteComponent(this);
