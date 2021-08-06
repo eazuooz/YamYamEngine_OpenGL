@@ -20,6 +20,9 @@ public:
 	void RemoveActor(class Actor* actor);
 
 	class Renderer* GetRenderer() { return mRenderer; }
+	class AudioSystem* GetAudioSystem() { return mAudioSystem; }
+
+public:
 	void SetIsRunning(bool running) { mIsRunning = running; }
 
 private:
@@ -34,6 +37,7 @@ private:
 	std::vector<class Actor*> mPendingActors;
 
 	class Renderer* mRenderer;
+	class AudioSystem* mAudioSystem;
 
 	Uint32 mTicksCount;
 	bool mIsRunning;

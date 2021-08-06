@@ -17,9 +17,6 @@
     <Filter Include="Engine\Component">
       <UniqueIdentifier>{67144949-3165-452c-aa3a-8c51d18ff86c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Component\Base">
-      <UniqueIdentifier>{e8bce230-95da-4599-8395-ea57b201398a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component\AI">
       <UniqueIdentifier>{a93ce350-3e09-4e2a-8a66-bca007fde86a}</UniqueIdentifier>
     </Filter>
@@ -62,6 +59,9 @@
     <Filter Include="Engine\Component\2D">
       <UniqueIdentifier>{bd165832-6fdb-494b-a3d5-a3ec090aa57c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Audio">
+      <UniqueIdentifier>{6b64fc80-cd2b-480f-b079-741d1c9e6801}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -69,9 +69,6 @@
     </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Engine\Game</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>Engine\Component\Base</Filter>
     </ClCompile>
     <ClCompile Include="Actor.cpp">
       <Filter>Engine\Game</Filter>
@@ -154,22 +151,31 @@
     <ClCompile Include="Renderer.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
-    <ClCompile Include="PlaneActor.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="MeshComponent.cpp">
       <Filter>Engine\Component\3D</Filter>
     </ClCompile>
     <ClCompile Include="CameraActor.cpp">
       <Filter>Engine\Game</Filter>
     </ClCompile>
+    <ClCompile Include="PlaneActor.cpp">
+      <Filter>Engine\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Engine\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Engine\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundEvent.cpp">
+      <Filter>Engine\Audio</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
       <Filter>Engine\Game</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Engine\Component\Base</Filter>
     </ClInclude>
     <ClInclude Include="Actor.h">
       <Filter>Engine\Game</Filter>
@@ -255,12 +261,26 @@
     <ClInclude Include="Renderer.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
-    <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="MeshComponent.h">
       <Filter>Engine\Component\3D</Filter>
     </ClInclude>
     <ClInclude Include="CameraActor.h">
       <Filter>Engine\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneActor.h">
+      <Filter>Engine\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Engine\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioComponent.h">
+      <Filter>Engine\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Engine\Audio</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundEvent.h">
+      <Filter>Engine\Audio</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
