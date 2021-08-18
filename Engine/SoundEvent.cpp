@@ -20,7 +20,7 @@ bool SoundEvent::IsValid()
 	return (mSystem && mSystem->GetEventInstance(mID) != nullptr);
 }
 
-void SoundEvent::ReStart()
+void SoundEvent::Restart()
 {
 	auto event = mSystem ? mSystem->GetEventInstance(mID) : nullptr;
 	if (event)

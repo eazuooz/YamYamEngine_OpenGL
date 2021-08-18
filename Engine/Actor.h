@@ -36,7 +36,7 @@ public:
 	// Any actor-specific input code (overridable)
 	virtual void ActorInput(const uint8_t* keyState);
 
-	// Getters/setters
+	// 추후에 TransformComponent로 빼야할 넘들
 	const Vector3& GetPosition() const { return mPosition; }
 	void SetPosition(const Vector3& pos) { mPosition = pos; mRecomputeWorldTransform = true; }
 	float GetScale() const { return mScale; }

@@ -9,7 +9,7 @@ public:
 	SoundEvent();
 
 	bool IsValid();
-	void ReStart();
+	void Restart();
 	void Stop(bool allowFadeOut = true);
 	
 	void SetPaused(bool pause);

@@ -2,25 +2,38 @@
 #include "MoveComponent.h"
 #include "SDL/SDL_scancode.h"
 #include "Renderer.h"
+#include "AudioSystem.h"
 #include "Game.h"
+#include "AudioComponent.h"
 
 CameraActor::CameraActor(Game* game)
 	:Actor(game)
 {
 	mMoveComp = new MoveComponent(this);
+	mAudioComp = new AudioComponent(this);
+	mLastFootstep = 0.0f;
+	mFootstep = mAudioComp->PlayEvent("event:/Footstep");
+	mFootstep.SetPaused(true);
 }
 
 void CameraActor::UpdateActor(float deltaTime)
 {
 	Actor::UpdateActor(deltaTime);
 
+	mLastFootstep -= deltaTime;
+	if (!Math::NearZero(mMoveComp->GetForwardSpeed()) && mLastFootstep <= 0.0f)
+	{
+		mFootstep.SetPaused(false);
+		mFootstep.Restart();
+		mLastFootstep = 0.5f;
+	}
 	// Compute new camera from this actor
 	Vector3 cameraPos = GetPosition();
 	Vector3 target = GetPosition() + GetForward() * 100.0f;
 	Vector3 up = Vector3::UnitZ;
-
 	Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
 	GetGame()->GetRenderer()->SetViewMatrix(view);
+	GetGame()->GetAudioSystem()->SetListener(view);
 }
 
 void CameraActor::ActorInput(const uint8_t* keys)
@@ -58,4 +71,10 @@ void CameraActor::ActorInput(const uint8_t* keys)
 	mMoveComp->SetForwardSpeed(forwardSpeed);
 	mMoveComp->SetAngularSpeed(angularSpeed);
 	mMoveComp->SetHorizonSpeed(horizenSpeed);
+}
+
+void CameraActor::SetFootStepSurface(float value)
+{
+	mFootstep.SetPaused(true);
+	mFootstep.SetParameter("Surface", value);
 }

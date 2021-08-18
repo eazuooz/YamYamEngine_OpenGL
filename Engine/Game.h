@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include "Math.h"
+#include "SoundEvent.h"
 
 // Game class
 class Game
@@ -27,6 +28,7 @@ public:
 
 private:
 	void ProcessInput();
+	void HandleKeyPress(int key);
 	void UpdateGame();
 	void GenerateOutput();
 	void LoadData();
@@ -44,4 +46,6 @@ private:
 	bool mUpdatingActors;
 
 	class CameraActor* mCameraActor; 
+	SoundEvent mMusicEvent;
+	SoundEvent mReverbSnap;
 };
