@@ -40,6 +40,7 @@
     <ClCompile Include="imGui\imgui_tables.cpp" />
     <ClCompile Include="imGui\imgui_widgets.cpp" />
     <ClCompile Include="InputComponent.cpp" />
+    <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Laser.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Math.cpp" />
@@ -79,6 +80,7 @@
     <ClInclude Include="imGui\imstb_textedit.h" />
     <ClInclude Include="imGui\imstb_truetype.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Laser.h" />
     <ClInclude Include="Math.h" />
     <ClInclude Include="Mesh.h" />

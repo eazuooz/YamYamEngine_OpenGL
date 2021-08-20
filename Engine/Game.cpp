@@ -10,6 +10,7 @@
 #include "CameraActor.h"
 #include "PlaneActor.h"
 #include "AudioComponent.h"
+#include "InputSystem.h"
 
 Game::Game()
 	: mIsRunning(true)
@@ -32,6 +33,13 @@ bool Game::Initialize()
 		SDL_Log("Failed to initialize renderer");
 		delete mRenderer;
 		mRenderer = nullptr;
+		return false;
+	}
+
+	mInputSystem = new InputSystem();
+	if (!mInputSystem->Initialize())
+	{
+		SDL_Log("Failed to initialize input system");
 		return false;
 	}
 
@@ -64,6 +72,8 @@ void Game::RunLoop()
 
 void Game::ProcessInput()
 {
+	mInputSystem->PrepareForUpdate();
+
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -71,6 +81,10 @@ void Game::ProcessInput()
 		{
 		case SDL_QUIT:
 			mIsRunning = false;
+			break;
+
+		case SDL_MOUSEWHEEL:
+			mInputSystem->ProcessEvent(event);
 			break;
 
 		case SDL_KEYDOWN:
@@ -84,6 +98,9 @@ void Game::ProcessInput()
 			break;
 		}
 	}
+
+	mInputSystem->Update();
+	const InputState& state = mInputSystem->GetState();
 
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 	if (keyState[SDL_SCANCODE_ESCAPE])

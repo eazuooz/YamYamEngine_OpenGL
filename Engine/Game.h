@@ -40,6 +40,7 @@ private:
 
 	class Renderer* mRenderer;
 	class AudioSystem* mAudioSystem;
+	class InputSystem* mInputSystem;
 
 	Uint32 mTicksCount;
 	bool mIsRunning;

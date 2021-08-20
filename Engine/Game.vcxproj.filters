@@ -172,6 +172,9 @@
     <ClCompile Include="SoundEvent.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -282,6 +285,7 @@
     <ClInclude Include="SoundEvent.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
+    <ClInclude Include="InputSystem.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag">
