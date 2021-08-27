@@ -326,6 +326,31 @@ Mesh* Renderer::GetMesh(const std::string& fileName)
 	return m;
 }
 
+Vector3 Renderer::Unproject(const Vector3& screenPoint) const
+{
+	Vector3 deviceCoord = screenPoint;
+	deviceCoord.x /= (mScreenWidth) * 0.5f;
+	deviceCoord.y /= (mScreenHeight) * 0.5f;
+
+	Matrix4 unprojection = mView * mProjection;
+	unprojection.Invert();
+
+	return Vector3::TransformWithPerspDiv(deviceCoord, unprojection);
+}
+
+void Renderer::GetScreenDirection(Vector3& outStart, Vector3& outDir) const
+{
+	//Get start point (in center of screen on near plane)
+	Vector3 screenPoint(0.0f, 0.0f, 0.0f);
+	outStart = Unproject(screenPoint);
+	screenPoint.z = 0.9f;
+
+	Vector3 end = Unproject(screenPoint);
+	
+	outDir = end - outStart;
+	outDir.Normalize();
+}
+
 bool Renderer::LoadShader()
 {
 	// Create sprite shader

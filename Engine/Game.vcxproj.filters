@@ -11,9 +11,6 @@
     <Filter Include="Engine\Base">
       <UniqueIdentifier>{7f89f39e-3072-463b-9924-0ff88a7793c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Game">
-      <UniqueIdentifier>{c70bed52-4545-4b66-ba6d-24efa2f06f5b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Component">
       <UniqueIdentifier>{67144949-3165-452c-aa3a-8c51d18ff86c}</UniqueIdentifier>
     </Filter>
@@ -62,16 +59,19 @@
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{6b64fc80-cd2b-480f-b079-741d1c9e6801}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\System">
+      <UniqueIdentifier>{7416c121-519c-4673-bae0-eddd48e38bfb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Actor">
+      <UniqueIdentifier>{c70bed52-4545-4b66-ba6d-24efa2f06f5b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Main</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Engine\Game</Filter>
-    </ClCompile>
     <ClCompile Include="Actor.cpp">
-      <Filter>Engine\Game</Filter>
+      <Filter>Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>Engine\Graphics</Filter>
@@ -155,10 +155,10 @@
       <Filter>Engine\Component\3D</Filter>
     </ClCompile>
     <ClCompile Include="CameraActor.cpp">
-      <Filter>Engine\Game</Filter>
+      <Filter>Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="PlaneActor.cpp">
-      <Filter>Engine\Game</Filter>
+      <Filter>Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Engine\Base</Filter>
@@ -166,22 +166,34 @@
     <ClCompile Include="AudioComponent.cpp">
       <Filter>Engine\Component</Filter>
     </ClCompile>
-    <ClCompile Include="AudioSystem.cpp">
-      <Filter>Engine\Audio</Filter>
-    </ClCompile>
     <ClCompile Include="SoundEvent.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
-      <Filter>Main</Filter>
+      <Filter>Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioSystem.cpp">
+      <Filter>Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowActor.cpp">
+      <Filter>Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSActor.cpp">
+      <Filter>Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="OrbitActor.cpp">
+      <Filter>Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="SplineActor.cpp">
+      <Filter>Engine\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Engine\Game</Filter>
-    </ClInclude>
     <ClInclude Include="Actor.h">
-      <Filter>Engine\Game</Filter>
+      <Filter>Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Engine\Graphics</Filter>
@@ -268,10 +280,10 @@
       <Filter>Engine\Component\3D</Filter>
     </ClInclude>
     <ClInclude Include="CameraActor.h">
-      <Filter>Engine\Game</Filter>
+      <Filter>Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="PlaneActor.h">
-      <Filter>Engine\Game</Filter>
+      <Filter>Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Engine\Base</Filter>
@@ -279,13 +291,30 @@
     <ClInclude Include="AudioComponent.h">
       <Filter>Engine\Component</Filter>
     </ClInclude>
-    <ClInclude Include="AudioSystem.h">
-      <Filter>Engine\Audio</Filter>
-    </ClInclude>
     <ClInclude Include="SoundEvent.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
-    <ClInclude Include="InputSystem.h" />
+    <ClInclude Include="InputSystem.h">
+      <Filter>Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioSystem.h">
+      <Filter>Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowActor.h">
+      <Filter>Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSActor.h">
+      <Filter>Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="OrbitActor.h">
+      <Filter>Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SplineActor.h">
+      <Filter>Engine\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag">

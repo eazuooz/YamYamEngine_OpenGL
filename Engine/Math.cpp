@@ -68,6 +68,7 @@ Vector3 Vector3::TransformWithPerspDiv(const Vector3& vec, const Matrix4& mat, f
 		vec.z * mat.mat[2][1] + w * mat.mat[3][1];
 	retVal.z = vec.x * mat.mat[0][2] + vec.y * mat.mat[1][2] +
 		vec.z * mat.mat[2][2] + w * mat.mat[3][2];
+
 	float transformedW = vec.x * mat.mat[0][3] + vec.y * mat.mat[1][3] +
 		vec.z * mat.mat[2][3] + w * mat.mat[3][3];
 	if (!Math::NearZero(Math::Abs(transformedW)))

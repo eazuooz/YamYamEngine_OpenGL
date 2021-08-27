@@ -49,4 +49,14 @@ private:
 	class CameraActor* mCameraActor; 
 	SoundEvent mMusicEvent;
 	SoundEvent mReverbSnap;
+
+	class FPSActor* mFPSActor;
+	class FollowActor* mFollowActor;
+	class OrbitActor* mOrbitActor;
+	class SplineActor* mSplineActor;
+	class Actor* mStartSphere;
+	class Actor* mEndSphere;
+	class SpriteComponent* mCrosshair;
+
+	void ChangeCamera(int monde);
 };

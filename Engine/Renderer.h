@@ -46,6 +46,8 @@ public:
 	float GetScreenWidth() const { return mScreenWidth; }
 	float GetScreenHeight() const { return mScreenHeight; }
 
+	Vector3 Unproject(const Vector3& screenPoint) const;
+	void GetScreenDirection(Vector3& outStart, Vector3& outDir) const;
 private:
 	bool LoadShader();
 	void CreateSpriteVerts();

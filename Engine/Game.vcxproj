@@ -30,6 +30,8 @@
     <ClCompile Include="CameraActor.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
     <ClCompile Include="Component.cpp" />
+    <ClCompile Include="FollowActor.cpp" />
+    <ClCompile Include="FPSActor.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Editor.cpp" />
     <ClCompile Include="imGui\imgui.cpp" />
@@ -47,12 +49,14 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshComponent.cpp" />
     <ClCompile Include="MoveComponent.cpp" />
+    <ClCompile Include="OrbitActor.cpp" />
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="Random.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Ship.cpp" />
     <ClCompile Include="SoundEvent.cpp" />
+    <ClCompile Include="SplineActor.cpp" />
     <ClCompile Include="SpriteComponent.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="VertexArray.cpp" />
@@ -69,6 +73,8 @@
     <ClInclude Include="CameraActor.h" />
     <ClInclude Include="CircleComponent.h" />
     <ClInclude Include="Component.h" />
+    <ClInclude Include="FollowActor.h" />
+    <ClInclude Include="FPSActor.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="Editor.h" />
     <ClInclude Include="imGui\imconfig.h" />
@@ -86,12 +92,14 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MeshComponent.h" />
     <ClInclude Include="MoveComponent.h" />
+    <ClInclude Include="OrbitActor.h" />
     <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Ship.h" />
     <ClInclude Include="SoundEvent.h" />
+    <ClInclude Include="SplineActor.h" />
     <ClInclude Include="SpriteComponent.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="VertexArray.h" />
