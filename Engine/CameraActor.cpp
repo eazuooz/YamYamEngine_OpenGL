@@ -70,7 +70,7 @@ void CameraActor::ActorInput(const uint8_t* keys)
 
 	mMoveComp->SetForwardSpeed(forwardSpeed);
 	mMoveComp->SetAngularSpeed(angularSpeed);
-	mMoveComp->SetHorizonSpeed(horizenSpeed);
+	//mMoveComp->SetHorizonSpeed(horizenSpeed);
 }
 
 void CameraActor::SetFootStepSurface(float value)

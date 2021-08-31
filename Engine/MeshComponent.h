@@ -13,8 +13,10 @@ public:
 	virtual void SetMesh(class Mesh* mesh) { mMesh = mesh; }
 	void SetTextureIndex(size_t index) { mTextureIndex = index; }
 
-	void Update(float deltaTime) override;
+	void SetVisible(bool visible) { mVisible = visible; }
+	bool GetVisible() const { return mVisible; }
 protected:
 	class Mesh* mMesh;
 	size_t mTextureIndex;
+	bool mVisible;
 };

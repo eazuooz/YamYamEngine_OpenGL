@@ -85,18 +85,16 @@ void Game::ProcessInput()
 		case SDL_QUIT:
 			mIsRunning = false;
 			break;
-
-		case SDL_MOUSEWHEEL:
-			mInputSystem->ProcessEvent(event);
-			break;
-
+			// This fires when a key's initially pressed
 		case SDL_KEYDOWN:
 			if (!event.key.repeat)
 			{
 				HandleKeyPress(event.key.keysym.sym);
 			}
 			break;
-
+		case SDL_MOUSEBUTTONDOWN:
+			HandleKeyPress(event.button.button);
+			break;
 		default:
 			break;
 		}
@@ -276,51 +274,52 @@ void Game::LoadData()
 	dir.mDiffuseColor = Vector3(0.78f, 0.88f, 1.0f);
 	dir.mSpecColor = Vector3(0.8f, 0.8f, 0.8f);
 
-	//// UI elements
-	//a = new Actor(this);
-	//a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
-	//SpriteComponent* sc = new SpriteComponent(a);
-	//sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
+	// UI elements
+	a = new Actor(this);
+	a->SetPosition(Vector3(-350.0f, -350.0f, 0.0f));
+	SpriteComponent* sc = new SpriteComponent(a);
+	sc->SetTexture(mRenderer->GetTexture("Assets/HealthBar.png"));
 
-	//a = new Actor(this);
-	//a->SetPosition(Vector3(-390.0f, 275.0f, 0.0f));
-	//a->SetScale(0.75f);
-	//sc = new SpriteComponent(a);
-	//sc->SetTexture(mRenderer->GetTexture("Assets/Radar.png"));
+	a = new Actor(this);
+	a->SetPosition(Vector3(-390.0f, 275.0f, 0.0f));
+	a->SetScale(0.75f);
+	sc = new SpriteComponent(a);
+	sc->SetTexture(mRenderer->GetTexture("Assets/Radar.png"));
 
-	//a = new Actor(this);
-	//a->SetScale(2.0f);
-	//mCrosshair = new SpriteComponent(a);
-	//mCrosshair->SetTexture(mRenderer->GetTexture("Assets/Crosshair.png"));
+	a = new Actor(this);
+	a->SetScale(2.0f);
+	mCrosshair = new SpriteComponent(a);
+	mCrosshair->SetTexture(mRenderer->GetTexture("Assets/Crosshair.png"));
 
-	//// Start music
-	//mMusicEvent = mAudioSystem->PlayEvent("event:/Music");
+	// Start music
+	mMusicEvent = mAudioSystem->PlayEvent("event:/Music");
 
-	//// Enable relative mouse mode for camera look
-	//SDL_SetRelativeMouseMode(SDL_TRUE);
-	//// Make an initial call to get relative to clear out
-	//SDL_GetRelativeMouseState(nullptr, nullptr);
+	// Enable relative mouse mode for camera look
+	SDL_SetRelativeMouseMode(SDL_TRUE);
+	// Make an initial call to get relative to clear out
+	SDL_GetRelativeMouseState(nullptr, nullptr);
 
-	//// Different camera actors
-	//mFPSActor = new FPSActor(this);
-	//mFollowActor = new FollowActor(this);
-	//mOrbitActor = new OrbitActor(this);
-	//mSplineActor = new SplineActor(this);
+	// Different camera actors
+	mFPSActor = new FPSActor(this);
+	mFollowActor = new FollowActor(this);
 
-	//ChangeCamera('1');
+	mOrbitActor = new OrbitActor(this);
+	mSplineActor = new SplineActor(this);
 
-	//// Spheres for demonstrating unprojection
-	//mStartSphere = new Actor(this);
-	//mStartSphere->SetPosition(Vector3(10000.0f, 0.0f, 0.0f));
-	//mStartSphere->SetScale(0.25f);
-	//mc = new MeshComponent(mStartSphere);
-	//mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
-	//mEndSphere = new Actor(this);
-	//mEndSphere->SetPosition(Vector3(10000.0f, 0.0f, 0.0f));
-	//mEndSphere->SetScale(0.25f);
-	//mc = new MeshComponent(mEndSphere);
-	//mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
-	//mc->SetTextureIndex(1);
+	ChangeCamera('1');
+
+	// Spheres for demonstrating unprojection
+	mStartSphere = new Actor(this);
+	mStartSphere->SetPosition(Vector3(10000.0f, 0.0f, 0.0f));
+	mStartSphere->SetScale(0.25f);
+	mc = new MeshComponent(mStartSphere);
+	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+	mEndSphere = new Actor(this);
+	mEndSphere->SetPosition(Vector3(10000.0f, 0.0f, 0.0f));
+	mEndSphere->SetScale(0.25f);
+	mc = new MeshComponent(mEndSphere);
+	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+	mc->SetTextureIndex(1);
 }
 
 
@@ -390,39 +389,39 @@ void Game::RemoveActor(Actor* actor)
 	}
 }
 
-void Game::ChangeCamera(int monde)
+void Game::ChangeCamera(int mode)
 {
-	//// Disable everything
-	//mFPSActor->SetState(Actor::EPaused);
-	//mFPSActor->SetVisible(false);
-	//mCrosshair->SetVisible(false);
-	//mFollowActor->SetState(Actor::EPaused);
-	//mFollowActor->SetVisible(false);
-	//mOrbitActor->SetState(Actor::EPaused);
-	//mOrbitActor->SetVisible(false);
-	//mSplineActor->SetState(Actor::EPaused);
+	// Disable everything
+	mFPSActor->SetState(Actor::EPaused);
+	mFPSActor->SetVisible(false);
+	mCrosshair->SetVisible(false);
+	mFollowActor->SetState(Actor::EPaused);
+	mFollowActor->SetVisible(false);
+	mOrbitActor->SetState(Actor::EPaused);
+	mOrbitActor->SetVisible(false);
+	mSplineActor->SetState(Actor::EPaused);
 
-	//// Enable the camera specified by the mode
-	//switch (mode)
-	//{
-	//case '1':
-	//default:
-	//	mFPSActor->SetState(Actor::EActive);
-	//	mFPSActor->SetVisible(true);
-	//	mCrosshair->SetVisible(true);
-	//	break;
-	//case '2':
-	//	mFollowActor->SetState(Actor::EActive);
-	//	mFollowActor->SetVisible(true);
-	//	break;
-	//case '3':
-	//	mOrbitActor->SetState(Actor::EActive);
-	//	mOrbitActor->SetVisible(true);
-	//	break;
-	//case '4':
-	//	mSplineActor->SetState(Actor::EActive);
-	//	mSplineActor->RestartSpline();
-	//	break;
-	//}
+	// Enable the camera specified by the mode
+	switch (mode)
+	{
+	case '1':
+	default:
+		mFPSActor->SetState(Actor::EActive);
+		mFPSActor->SetVisible(true);
+		mCrosshair->SetVisible(true);
+		break;
+	case '2':
+		mFollowActor->SetState(Actor::EActive);
+		mFollowActor->SetVisible(true);
+		break;
+	case '3':
+		mOrbitActor->SetState(Actor::EActive);
+		mOrbitActor->SetVisible(true);
+		break;
+	case '4':
+		mSplineActor->SetState(Actor::EActive);
+		mSplineActor->RestartSpline();
+		break;
+	}
 }
 

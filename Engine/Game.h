@@ -58,5 +58,5 @@ private:
 	class Actor* mEndSphere;
 	class SpriteComponent* mCrosshair;
 
-	void ChangeCamera(int monde);
+	void ChangeCamera(int mode);
 };

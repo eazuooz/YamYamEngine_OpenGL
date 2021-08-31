@@ -1,3 +1,11 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #include "MeshComponent.h"
 #include "Shader.h"
 #include "Mesh.h"
@@ -11,6 +19,7 @@ MeshComponent::MeshComponent(Actor* owner)
 	:Component(owner)
 	, mMesh(nullptr)
 	, mTextureIndex(0)
+	, mVisible(true)
 {
 	mOwner->GetGame()->GetRenderer()->AddMeshComp(this);
 }
@@ -24,21 +33,21 @@ void MeshComponent::Draw(Shader* shader)
 {
 	if (mMesh)
 	{
+		// Set the world transform
 		shader->SetMatrixUniform("uWorldTransform",
 			mOwner->GetWorldTransform());
+		// Set specular power
 		shader->SetFloatUniform("uSpecPower", mMesh->GetSpecPower());
+		// Set the active texture
 		Texture* t = mMesh->GetTexture(mTextureIndex);
 		if (t)
 		{
 			t->SetActive();
 		}
+		// Set the mesh's vertex array as active
 		VertexArray* va = mMesh->GetVertexArray();
 		va->SetActive();
+		// Draw
 		glDrawElements(GL_TRIANGLES, va->GetNumIndices(), GL_UNSIGNED_INT, nullptr);
 	}
-}
-
-void MeshComponent::Update(float deltaTime)
-{
-	int a = 0;
 }

@@ -65,6 +65,9 @@
     <Filter Include="Engine\Actor">
       <UniqueIdentifier>{c70bed52-4545-4b66-ba6d-24efa2f06f5b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Actor\Camera">
+      <UniqueIdentifier>{08907b3c-276d-4b29-ba69-749718a0c21d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -154,9 +157,6 @@
     <ClCompile Include="MeshComponent.cpp">
       <Filter>Engine\Component\3D</Filter>
     </ClCompile>
-    <ClCompile Include="CameraActor.cpp">
-      <Filter>Engine\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="PlaneActor.cpp">
       <Filter>Engine\Actor</Filter>
     </ClCompile>
@@ -189,6 +189,24 @@
     </ClCompile>
     <ClCompile Include="SplineActor.cpp">
       <Filter>Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraActor.cpp">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCamera.cpp">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCamera.cpp">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="OrbitCamera.cpp">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SplineCamera.cpp">
+      <Filter>Engine\Actor\Camera</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -279,9 +297,6 @@
     <ClInclude Include="MeshComponent.h">
       <Filter>Engine\Component\3D</Filter>
     </ClInclude>
-    <ClInclude Include="CameraActor.h">
-      <Filter>Engine\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="PlaneActor.h">
       <Filter>Engine\Actor</Filter>
     </ClInclude>
@@ -314,6 +329,24 @@
     </ClInclude>
     <ClInclude Include="SplineActor.h">
       <Filter>Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraActor.h">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCamera.h">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCamera.h">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="OrbitCamera.h">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SplineCamera.h">
+      <Filter>Engine\Actor\Camera</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,3 +1,11 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #include "SpriteComponent.h"
 #include "Texture.h"
 #include "Shader.h"
@@ -11,6 +19,7 @@ SpriteComponent::SpriteComponent(Actor* owner, int drawOrder)
 	, mDrawOrder(drawOrder)
 	, mTexWidth(0)
 	, mTexHeight(0)
+	, mVisible(true)
 {
 	mOwner->GetGame()->GetRenderer()->AddSprite(this);
 }

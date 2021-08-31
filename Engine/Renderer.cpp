@@ -212,7 +212,10 @@ void Renderer::Draw()
 	SetLightUniforms(mMeshShader);
 	for (auto mc : mMeshComps)
 	{
-		mc->Draw(mMeshShader);
+		if (mc->GetVisible())
+		{
+			mc->Draw(mMeshShader);
+		}
 	}
 
 	glDisable(GL_DEPTH_TEST);
@@ -226,7 +229,10 @@ void Renderer::Draw()
 	mSpriteVerts->SetActive();
 	for (auto sprite : mSprites)
 	{
-		sprite->Draw(mSpriteShader);
+		if (sprite->GetVisible())
+		{
+			sprite->Draw(mSpriteShader);
+		}
 	}
 
 
@@ -405,7 +411,7 @@ void Renderer::SetLightUniforms(Shader* shader)
 	invView.Invert();
 	shader->SetVectorUniform("uCameraPos", invView.GetTranslation());
 	shader->SetVectorUniform("uAmbientLight", mAmbientLight);
-
+	
 	shader->SetVectorUniform("uDirLight.mDirection",
 		mDirLight.mDirection);
 	shader->SetVectorUniform("uDirLight.mDiffuseColor",
