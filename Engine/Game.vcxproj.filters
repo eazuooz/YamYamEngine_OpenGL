@@ -208,6 +208,9 @@
     <ClCompile Include="SplineCamera.cpp">
       <Filter>Engine\Actor\Camera</Filter>
     </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Engine\Component\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h">
@@ -347,6 +350,9 @@
     </ClInclude>
     <ClInclude Include="SplineCamera.h">
       <Filter>Engine\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Engine\Component\Collision</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

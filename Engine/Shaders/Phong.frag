@@ -1,4 +1,4 @@
-#version 330
+#version 460
 
 in vec2 fragTexCoord;
 in vec3 fragNormal;

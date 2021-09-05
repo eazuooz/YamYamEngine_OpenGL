@@ -30,6 +30,7 @@
     <ClCompile Include="CameraActor.cpp" />
     <ClCompile Include="CameraComponent.cpp" />
     <ClCompile Include="CircleComponent.cpp" />
+    <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="FollowActor.cpp" />
     <ClCompile Include="FollowCamera.cpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="CameraActor.h" />
     <ClInclude Include="CameraComponent.h" />
     <ClInclude Include="CircleComponent.h" />
+    <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="FollowActor.h" />
     <ClInclude Include="FollowCamera.h" />

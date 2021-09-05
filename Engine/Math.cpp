@@ -69,8 +69,11 @@ Vector3 Vector3::TransformWithPerspDiv(const Vector3& vec, const Matrix4& mat, f
 	retVal.z = vec.x * mat.mat[0][2] + vec.y * mat.mat[1][2] +
 		vec.z * mat.mat[2][2] + w * mat.mat[3][2];
 
+	//언프로젝트 행렬을 NDC에 곱하면 W 요솟값이 변경된다.
+	//이 요솟값을 w로 나눠서 w요소를 1로 되돌루 있도록 재 정규화가 필요하다.
 	float transformedW = vec.x * mat.mat[0][3] + vec.y * mat.mat[1][3] +
 		vec.z * mat.mat[2][3] + w * mat.mat[3][3];
+	
 	if (!Math::NearZero(Math::Abs(transformedW)))
 	{
 		transformedW = 1.0f / transformedW;

@@ -7,7 +7,7 @@
 // ----------------------------------------------------------------
 
 // Request GLSL 3.3
-#version 330
+#version 460
 
 // This should correspond to the data stored
 // for each vertex in the vertex buffer.
