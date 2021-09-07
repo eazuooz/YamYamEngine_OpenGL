@@ -13,6 +13,7 @@ class Game
 {
 public:
 	Game();
+	void SetIsRunning(bool running) { mIsRunning = running; }
 	bool Initialize();
 	void RunLoop();
 	void Shutdown();
@@ -22,10 +23,12 @@ public:
 
 	class Renderer* GetRenderer() { return mRenderer; }
 	class AudioSystem* GetAudioSystem() { return mAudioSystem; }
+	class PhysWorld* GetPhysWorld() { return mPhysWorld; }
 
-public:
-	void SetIsRunning(bool running) { mIsRunning = running; }
-
+	// Game-specific
+	void AddPlane(class PlaneActor* plane);
+	void RemovePlane(class PlaneActor* plane);
+	std::vector<class PlaneActor*>& GetPlanes() { return mPlanes; }
 private:
 	void ProcessInput();
 	void HandleKeyPress(int key);
@@ -34,29 +37,26 @@ private:
 	void LoadData();
 	void UnloadData();
 
-
+	// All the actors in the game
 	std::vector<class Actor*> mActors;
+	// Any pending actors
 	std::vector<class Actor*> mPendingActors;
 
 	class Renderer* mRenderer;
 	class AudioSystem* mAudioSystem;
-	class InputSystem* mInputSystem;
+	class PhysWorld* mPhysWorld;
 
 	Uint32 mTicksCount;
 	bool mIsRunning;
+	// Track if we're updating actors right now
 	bool mUpdatingActors;
 
-	class CameraActor* mCameraActor; 
-	SoundEvent mMusicEvent;
-	SoundEvent mReverbSnap;
-
+	// Game-specific code
+	std::vector<class PlaneActor*> mPlanes;
 	class FPSActor* mFPSActor;
-	class FollowActor* mFollowActor;
-	class OrbitActor* mOrbitActor;
-	class SplineActor* mSplineActor;
-	class Actor* mStartSphere;
-	class Actor* mEndSphere;
 	class SpriteComponent* mCrosshair;
-
-	void ChangeCamera(int mode);
+	SoundEvent mMusicEvent;
 };
+
+
+//public:

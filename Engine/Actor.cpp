@@ -1,11 +1,3 @@
-// ----------------------------------------------------------------
-// From Game Programming in C++ by Sanjay Madhav
-// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
-// 
-// Released under the BSD License
-// See LICENSE in root directory for full details.
-// ----------------------------------------------------------------
-
 #include "Actor.h"
 #include "Game.h"
 #include "Component.h"
@@ -14,8 +6,8 @@
 Actor::Actor(Game* game)
 	:mState(EActive)
 	, mPosition(Vector3::Zero)
-	, mScale(1.0f)
 	, mRotation(Quaternion::Identity)
+	, mScale(1.0f)
 	, mGame(game)
 	, mRecomputeWorldTransform(true)
 {
@@ -74,6 +66,31 @@ void Actor::ProcessInput(const uint8_t* keyState)
 
 void Actor::ActorInput(const uint8_t* keyState)
 {
+
+}
+
+void Actor::RotateToNewForward(const Vector3& forward)
+{
+	// Figure out difference between original (unit x) and new
+	float dot = Vector3::Dot(Vector3::UnitX, forward);
+	float angle = Math::Acos(dot);
+	// Facing down X
+	if (dot > 0.9999f)
+	{
+		SetRotation(Quaternion::Identity);
+	}
+	// Facing down -X
+	else if (dot < -0.9999f)
+	{
+		SetRotation(Quaternion(Vector3::UnitZ, Math::Pi));
+	}
+	else
+	{
+		// Rotate about axis from cross product
+		Vector3 axis = Vector3::Cross(Vector3::UnitX, forward);
+		axis.Normalize();
+		SetRotation(Quaternion(axis, angle));
+	}
 }
 
 void Actor::ComputeWorldTransform()
@@ -84,7 +101,7 @@ void Actor::ComputeWorldTransform()
 		// Scale, then rotate, then translate
 		mWorldTransform = Matrix4::CreateScale(mScale);
 		mWorldTransform *= Matrix4::CreateFromQuaternion(mRotation);
-		mWorldTransform *= Matrix4::CreateTranslation(Vector3(mPosition));
+		mWorldTransform *= Matrix4::CreateTranslation(mPosition);
 
 		// Inform components world transform updated
 		for (auto comp : mComponents)

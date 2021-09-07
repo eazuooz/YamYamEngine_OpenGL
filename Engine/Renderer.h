@@ -5,10 +5,6 @@
 #include "SDL/SDL.h"
 #include "Math.h"
 
-#include "ImGui/imgui.h"
-#include "ImGui/imgui_impl_sdl.h"
-#include "ImGui/imgui_impl_opengl3.h"
-
 struct DirectionalLight
 {
 	Vector3 mDirection;
@@ -87,7 +83,5 @@ private:
 	SDL_Window* mWindow;
 	// OpenGL context
 	SDL_GLContext mContext;
-
-	ImGuiIO* io;
 };
 

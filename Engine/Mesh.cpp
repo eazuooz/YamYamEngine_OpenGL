@@ -2,20 +2,19 @@
 #include "Renderer.h"
 #include "Texture.h"
 #include "VertexArray.h"
-#include "Math.h"
-#include "rapidjson/document.h"
 #include <fstream>
 #include <sstream>
+#include <rapidjson/document.h>
 #include <SDL/SDL_log.h>
-
+#include "Math.h"
 
 Mesh::Mesh()
-	:mVertexArray(nullptr)
+	:mBox(Vector3::Infinity, Vector3::NegInfinity)
+	, mVertexArray(nullptr)
 	, mRadius(0.0f)
 	, mSpecPower(100.0f)
 {
 }
-
 
 Mesh::~Mesh()
 {
@@ -109,6 +108,7 @@ bool Mesh::Load(const std::string& fileName, Renderer* renderer)
 
 		Vector3 pos(vert[0].GetDouble(), vert[1].GetDouble(), vert[2].GetDouble());
 		mRadius = Math::Max(mRadius, pos.LengthSq());
+		mBox.UpdateMinMax(pos);
 
 		// Add the floats
 		for (rapidjson::SizeType i = 0; i < vert.Size(); i++)

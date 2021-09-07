@@ -1,22 +1,21 @@
-#define IMGUI_IMPL_OPENGL_LOADER_GLEW
-
 #include "Game.h"
 #include <algorithm>
 #include "Renderer.h"
 #include "AudioSystem.h"
-#include "InputSystem.h"
+#include "PhysWorld.h"
 #include "Actor.h"
 #include "SpriteComponent.h"
 #include "MeshComponent.h"
 #include "FPSActor.h"
 #include "PlaneActor.h"
-#include "AudioComponent.h"
-#include "FollowActor.h"
-#include "OrbitActor.h"
-#include "SplineActor.h"
+#include "TargetActor.h"
+#include "BallActor.h"
 
 Game::Game()
-	: mIsRunning(true)
+	:mRenderer(nullptr)
+	, mAudioSystem(nullptr)
+	, mPhysWorld(nullptr)
+	, mIsRunning(true)
 	, mUpdatingActors(false)
 {
 
@@ -30,6 +29,7 @@ bool Game::Initialize()
 		return false;
 	}
 
+	// Create the renderer
 	mRenderer = new Renderer(this);
 	if (!mRenderer->Initialize(1024.0f, 768.0f))
 	{
@@ -39,13 +39,7 @@ bool Game::Initialize()
 		return false;
 	}
 
-	mInputSystem = new InputSystem();
-	if (!mInputSystem->Initialize())
-	{
-		SDL_Log("Failed to initialize input system");
-		return false;
-	}
-
+	// Create the audio system
 	mAudioSystem = new AudioSystem(this);
 	if (!mAudioSystem->Initialize())
 	{
@@ -56,8 +50,11 @@ bool Game::Initialize()
 		return false;
 	}
 
+	// Create the physics world
+	mPhysWorld = new PhysWorld(this);
 
 	LoadData();
+
 	mTicksCount = SDL_GetTicks();
 
 	return true;
@@ -73,10 +70,19 @@ void Game::RunLoop()
 	}
 }
 
+void Game::AddPlane(PlaneActor* plane)
+{
+	mPlanes.emplace_back(plane);
+}
+
+void Game::RemovePlane(PlaneActor* plane)
+{
+	auto iter = std::find(mPlanes.begin(), mPlanes.end(), plane);
+	mPlanes.erase(iter);
+}
+
 void Game::ProcessInput()
 {
-	mInputSystem->PrepareForUpdate();
-
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -100,18 +106,15 @@ void Game::ProcessInput()
 		}
 	}
 
-	mInputSystem->Update();
-	const InputState& state = mInputSystem->GetState();
-
-	const Uint8* keyState = SDL_GetKeyboardState(NULL);
-	if (keyState[SDL_SCANCODE_ESCAPE])
+	const Uint8* state = SDL_GetKeyboardState(NULL);
+	if (state[SDL_SCANCODE_ESCAPE])
 	{
 		mIsRunning = false;
 	}
 
 	for (auto actor : mActors)
 	{
-		actor->ProcessInput(keyState);
+		actor->ProcessInput(state);
 	}
 }
 
@@ -135,23 +138,10 @@ void Game::HandleKeyPress(int key)
 		mAudioSystem->SetBusVolume("bus:/", volume);
 		break;
 	}
-	case '1':
-	case '2':
-	case '3':
-	case '4':
-		ChangeCamera(key);
-		break;
 	case SDL_BUTTON_LEFT:
 	{
-		// Get start point (in center of screen on near plane)
-		Vector3 screenPoint(0.0f, 0.0f, 0.0f);
-		Vector3 start = mRenderer->Unproject(screenPoint);
-		// Get end point (in center of screen, between near and far)
-		screenPoint.z = 0.9f;
-		Vector3 end = mRenderer->Unproject(screenPoint);
-		// Set spheres to points
-		mStartSphere->SetPosition(start);
-		mEndSphere->SetPosition(end);
+		// Fire weapon
+		mFPSActor->Shoot();
 		break;
 	}
 	default:
@@ -163,7 +153,8 @@ void Game::UpdateGame()
 {
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
-	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16));
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
+		;
 
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
 	if (deltaTime > 0.05f)
@@ -204,6 +195,7 @@ void Game::UpdateGame()
 		delete actor;
 	}
 
+	// Update audio system
 	mAudioSystem->Update(deltaTime);
 }
 
@@ -214,20 +206,10 @@ void Game::GenerateOutput()
 
 void Game::LoadData()
 {
-	Actor* a = new Actor(this);
-	a->SetPosition(Vector3(200.0f, 75.0f, 0.0f));
-	a->SetScale(100.0f);
-	Quaternion q(Vector3::UnitY, -Math::PiOver2);
-	q = Quaternion::Concatenate(q, Quaternion(Vector3::UnitZ, Math::Pi + Math::Pi / 4.0f));
-	a->SetRotation(q);
-	MeshComponent* mc = new MeshComponent(a);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Cube.gpmesh"));
-
-	a = new Actor(this);
-	a->SetPosition(Vector3(200.0f, -75.0f, 0.0f));
-	a->SetScale(3.0f);
-	mc = new MeshComponent(a);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
+	// Create actors
+	Actor* a = nullptr;
+	Quaternion q;
+	//MeshComponent* mc = nullptr;
 
 	// Setup floor
 	const float start = -1250.0f;
@@ -301,27 +283,17 @@ void Game::LoadData()
 
 	// Different camera actors
 	mFPSActor = new FPSActor(this);
-	mFollowActor = new FollowActor(this);
 
-	mOrbitActor = new OrbitActor(this);
-	mSplineActor = new SplineActor(this);
-
-	ChangeCamera('1');
-
-	// Spheres for demonstrating unprojection
-	mStartSphere = new Actor(this);
-	mStartSphere->SetPosition(Vector3(10000.0f, 0.0f, 0.0f));
-	mStartSphere->SetScale(0.25f);
-	mc = new MeshComponent(mStartSphere);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
-	mEndSphere = new Actor(this);
-	mEndSphere->SetPosition(Vector3(10000.0f, 0.0f, 0.0f));
-	mEndSphere->SetScale(0.25f);
-	mc = new MeshComponent(mEndSphere);
-	mc->SetMesh(mRenderer->GetMesh("Assets/Sphere.gpmesh"));
-	mc->SetTextureIndex(1);
+	// Create target actors
+	a = new TargetActor(this);
+	a->SetPosition(Vector3(1450.0f, 0.0f, 100.0f));
+	a = new TargetActor(this);
+	a->SetPosition(Vector3(1450.0f, 0.0f, 400.0f));
+	a = new TargetActor(this);
+	a->SetPosition(Vector3(1450.0f, -500.0f, 200.0f));
+	a = new TargetActor(this);
+	a->SetPosition(Vector3(1450.0f, 500.0f, 200.0f));
 }
-
 
 void Game::UnloadData()
 {
@@ -338,12 +310,10 @@ void Game::UnloadData()
 	}
 }
 
-
-
-
 void Game::Shutdown()
 {
 	UnloadData();
+	delete mPhysWorld;
 	if (mRenderer)
 	{
 		mRenderer->Shutdown();
@@ -388,40 +358,3 @@ void Game::RemoveActor(Actor* actor)
 		mActors.pop_back();
 	}
 }
-
-void Game::ChangeCamera(int mode)
-{
-	// Disable everything
-	mFPSActor->SetState(Actor::EPaused);
-	mFPSActor->SetVisible(false);
-	mCrosshair->SetVisible(false);
-	mFollowActor->SetState(Actor::EPaused);
-	mFollowActor->SetVisible(false);
-	mOrbitActor->SetState(Actor::EPaused);
-	mOrbitActor->SetVisible(false);
-	mSplineActor->SetState(Actor::EPaused);
-
-	// Enable the camera specified by the mode
-	switch (mode)
-	{
-	case '1':
-	default:
-		mFPSActor->SetState(Actor::EActive);
-		mFPSActor->SetVisible(true);
-		mCrosshair->SetVisible(true);
-		break;
-	case '2':
-		mFollowActor->SetState(Actor::EActive);
-		mFollowActor->SetVisible(true);
-		break;
-	case '3':
-		mOrbitActor->SetState(Actor::EActive);
-		mOrbitActor->SetVisible(true);
-		break;
-	case '4':
-		mSplineActor->SetState(Actor::EActive);
-		mSplineActor->RestartSpline();
-		break;
-	}
-}
-

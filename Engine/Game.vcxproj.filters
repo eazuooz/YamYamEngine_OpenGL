@@ -68,6 +68,9 @@
     <Filter Include="Engine\Actor\Camera">
       <UniqueIdentifier>{08907b3c-276d-4b29-ba69-749718a0c21d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Component\Audip">
+      <UniqueIdentifier>{f81f5f32-8580-4e01-b39e-5552bbf0eccb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -163,9 +166,6 @@
     <ClCompile Include="Component.cpp">
       <Filter>Engine\Base</Filter>
     </ClCompile>
-    <ClCompile Include="AudioComponent.cpp">
-      <Filter>Engine\Component</Filter>
-    </ClCompile>
     <ClCompile Include="SoundEvent.cpp">
       <Filter>Engine\Audio</Filter>
     </ClCompile>
@@ -210,6 +210,24 @@
     </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Engine\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxComponent.cpp">
+      <Filter>Engine\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="PhysWorld.cpp">
+      <Filter>Engine\System</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Engine\Component\Audip</Filter>
+    </ClCompile>
+    <ClCompile Include="BallActor.cpp">
+      <Filter>Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="BallMove.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetActor.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -306,9 +324,6 @@
     <ClInclude Include="Component.h">
       <Filter>Engine\Base</Filter>
     </ClInclude>
-    <ClInclude Include="AudioComponent.h">
-      <Filter>Engine\Component</Filter>
-    </ClInclude>
     <ClInclude Include="SoundEvent.h">
       <Filter>Engine\Audio</Filter>
     </ClInclude>
@@ -354,6 +369,20 @@
     <ClInclude Include="Collision.h">
       <Filter>Engine\Component\Collision</Filter>
     </ClInclude>
+    <ClInclude Include="BoxComponent.h">
+      <Filter>Engine\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="PhysWorld.h">
+      <Filter>Engine\System</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioComponent.h">
+      <Filter>Engine\Component\Audip</Filter>
+    </ClInclude>
+    <ClInclude Include="BallActor.h">
+      <Filter>Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="BallMove.h" />
+    <ClInclude Include="TargetActor.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag">
