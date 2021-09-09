@@ -94,11 +94,11 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 	CreateSpriteVerts();
 
 	// Create render target for mirror
-	//if (!CreateMirrorTarget())
-	//{
-	//	SDL_Log("Failed to create render target for mirror.");
-	//	return false;
-	//}
+	if (!CreateMirrorTarget())
+	{
+		SDL_Log("Failed to create render target for mirror.");
+		return false;
+	}
 	
 	// Create G-buffer
 	mGBuffer = new GBuffer();
@@ -166,10 +166,10 @@ void Renderer::UnloadData()
 
 void Renderer::Draw()
 {
-	// Draw to the mirror texture first
-	//Draw3DScene(mMirrorBuffer, mMirrorView, mProjection);
+	//Draw to the mirror texture first
+	Draw3DScene(mMirrorBuffer, mMirrorView, mProjection, 0.25f);
 	// Draw the 3D scene to the G-buffer
-	Draw3DScene(mGBuffer->GetBufferID(), mView, mProjection, false);
+	Draw3DScene(mGBuffer->GetBufferID(), mView, mProjection, 1.0f, false);
 	// Set the frame buffer back to zero (screen's frame buffer)
 	glBindFramebuffer(GL_FRAMEBUFFER, 0);
 	// Draw from the GBuffer
@@ -317,10 +317,17 @@ Mesh* Renderer::GetMesh(const std::string & fileName)
 	return m;
 }
 
-void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj, bool lit)
+void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj, float viewPortScale, bool lit)
 {
 	// Set the current frame buffer
 	glBindFramebuffer(GL_FRAMEBUFFER, framebuffer);
+
+	// Set viewport size based on scale
+	glViewport(0, 0,
+		static_cast<int>(mScreenWidth * viewPortScale),
+		static_cast<int>(mScreenHeight * viewPortScale)
+	);
+
 	// Clear color buffer/depth buffer
 	glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 	glDepthMask(GL_TRUE);
@@ -367,13 +374,15 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4& view, const 
 
 bool Renderer::CreateMirrorTarget()
 {
+
+
 	// Generate a frame buffer for the mirror texture
 	glGenFramebuffers(1, &mMirrorBuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, mMirrorBuffer);
 
 	// Create the texture we'll use for rendering
-	int width = static_cast<int>(mScreenWidth);
-	int height = static_cast<int>(mScreenHeight);
+	int width = static_cast<int>(mScreenWidth) / 4;
+	int height = static_cast<int>(mScreenHeight) / 4;
 	mMirrorTexture = new Texture();
 	mMirrorTexture->CreateForRendering(width, height, GL_RGB);
 

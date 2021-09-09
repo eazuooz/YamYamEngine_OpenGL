@@ -73,7 +73,7 @@ public:
 	class GBuffer* GetGBuffer() { return mGBuffer; }
 private:
 	// Chapter 14 additions
-	void Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj, bool lit = true);
+	void Draw3DScene(unsigned int framebuffer, const Matrix4& view, const Matrix4& proj, float viewPortScale = 1.0f, bool lit = true);
 	bool CreateMirrorTarget();
 	void DrawFromGBuffer();
 	//void DrawFromGBuffer();

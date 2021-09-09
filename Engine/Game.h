@@ -86,6 +86,7 @@ private:
 	std::vector<class Actor*> mPendingActors;
 
 	class Renderer* mRenderer;
+	class InputSystem* mInputSystem;
 	class AudioSystem* mAudioSystem;
 	class PhysWorld* mPhysWorld;
 	class HUD* mHUD;

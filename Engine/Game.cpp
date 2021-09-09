@@ -9,6 +9,7 @@
 #include "Game.h"
 #include <algorithm>
 #include "Renderer.h"
+#include "InputSystem.h"
 #include "AudioSystem.h"
 #include "PhysWorld.h"
 #include "Actor.h"
@@ -58,6 +59,14 @@ bool Game::Initialize()
 		return false;
 	}
 
+	// Create the input system
+	mInputSystem = new InputSystem();
+	if (!mInputSystem->Initialize())
+	{
+		SDL_Log("Failed to initialize input system");
+		return false;
+	}
+
 	// Create the audio system
 	mAudioSystem = new AudioSystem(this);
 	if (!mAudioSystem->Initialize())
@@ -98,6 +107,8 @@ void Game::RunLoop()
 
 void Game::ProcessInput()
 {
+	mInputSystem->PrepareForUpdate();
+
 	SDL_Event event;
 	while (SDL_PollEvent(&event))
 	{
@@ -132,25 +143,31 @@ void Game::ProcessInput()
 						HandleKeyPress(event.button.button);
 				}
 				break;
+			case SDL_MOUSEWHEEL:
+				mInputSystem->ProcessEvent(event);
+				break;
 			default:
 				break;
 		}
 	}
 	
-	const Uint8* state = SDL_GetKeyboardState(NULL);
+	mInputSystem->Update();
+	const InputState& state = mInputSystem->GetState();
+	
+	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 	if (mGameState == EGameplay)
 	{
 		for (auto actor : mActors)
 		{
 			if (actor->GetState() == Actor::EActive)
 			{
-				actor->ProcessInput(state);
+				actor->ProcessInput(keyState);
 			}
 		}
 	}
 	else if (!mUIStack.empty())
 	{
-		mUIStack.back()->ProcessInput(state);
+		mUIStack.back()->ProcessInput(keyState);
 	}
 }
 
