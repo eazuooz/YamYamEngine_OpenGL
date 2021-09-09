@@ -1,12 +1,21 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #include "MoveComponent.h"
 #include "Actor.h"
+#include "LevelLoader.h"
 
-
-MoveComponent::MoveComponent(Actor * owner, int updateOrder)
-	:Component(owner, updateOrder)
-	, mAngularSpeed(0.0f)
-	, mForwardSpeed(0.0f)
+MoveComponent::MoveComponent(class Actor* owner, int updateOrder)
+:Component(owner, updateOrder)
+,mAngularSpeed(0.0f)
+,mForwardSpeed(0.0f)
 {
+	
 }
 
 void MoveComponent::Update(float deltaTime)
@@ -22,7 +31,7 @@ void MoveComponent::Update(float deltaTime)
 		rot = Quaternion::Concatenate(rot, inc);
 		mOwner->SetRotation(rot);
 	}
-
+	
 	if (!Math::NearZero(mForwardSpeed) || !Math::NearZero(mStrafeSpeed))
 	{
 		Vector3 pos = mOwner->GetPosition();
@@ -30,4 +39,22 @@ void MoveComponent::Update(float deltaTime)
 		pos += mOwner->GetRight() * mStrafeSpeed * deltaTime;
 		mOwner->SetPosition(pos);
 	}
+}
+
+void MoveComponent::LoadProperties(const rapidjson::Value& inObj)
+{
+	Component::LoadProperties(inObj);
+
+	JsonHelper::GetFloat(inObj, "angularSpeed", mAngularSpeed);
+	JsonHelper::GetFloat(inObj, "forwardSpeed", mForwardSpeed);
+	JsonHelper::GetFloat(inObj, "strafeSpeed", mStrafeSpeed);
+}
+
+void MoveComponent::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObj) const
+{
+	Component::SaveProperties(alloc, inObj);
+
+	JsonHelper::AddFloat(alloc, inObj, "angularSpeed", mAngularSpeed);
+	JsonHelper::AddFloat(alloc, inObj, "forwardSpeed", mForwardSpeed);
+	JsonHelper::AddFloat(alloc, inObj, "strafeSpeed", mStrafeSpeed);
 }

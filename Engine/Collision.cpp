@@ -1,10 +1,26 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+// MinDistSq between two line segments:
+// Copyright 2001 softSurfer, 2012 Dan Sunday
+// This code may be freely used, distributed and modified for any purpose
+// providing that this copyright notice is included with it.
+// SoftSurfer makes no warranty for this code, and cannot be held
+// liable for any real or imagined damage resulting from its use.
+// Users of this code must verify correctness for their application.
+// ----------------------------------------------------------------
+
 #include "Collision.h"
 #include <algorithm>
 #include <array>
 
 LineSegment::LineSegment(const Vector3& start, const Vector3& end)
 	:mStart(start)
-	, mEnd(end)
+	,mEnd(end)
 {
 }
 
@@ -43,7 +59,7 @@ float LineSegment::MinDistSq(const Vector3& point) const
 	}
 }
 
-float LineSegment::MinDistSq(const LineSegment& s1, const LineSegment& s2)
+float LineSegment::MinDistSq(const LineSegment & s1, const LineSegment & s2)
 {
 	Vector3   u = s1.mEnd - s1.mStart;
 	Vector3   v = s2.mEnd - s2.mStart;
@@ -53,7 +69,7 @@ float LineSegment::MinDistSq(const LineSegment& s1, const LineSegment& s2)
 	float    c = Vector3::Dot(v, v);         // always >= 0
 	float    d = Vector3::Dot(u, w);
 	float    e = Vector3::Dot(v, w);
-	float    D = a * c - b * b;        // always >= 0
+	float    D = a*c - b*b;        // always >= 0
 	float    sc, sN, sD = D;       // sc = sN / sD, default sD = D >= 0
 	float    tc, tN, tD = D;       // tc = tN / tD, default tD = D >= 0
 
@@ -65,8 +81,8 @@ float LineSegment::MinDistSq(const LineSegment& s1, const LineSegment& s2)
 		tD = c;
 	}
 	else {                 // get the closest points on the infinite lines
-		sN = (b * e - c * d);
-		tN = (a * e - b * d);
+		sN = (b*e - c*d);
+		tN = (a*e - b*d);
 		if (sN < 0.0) {        // sc < 0 => the s=0 edge is visible
 			sN = 0.0;
 			tN = e;
@@ -115,7 +131,7 @@ float LineSegment::MinDistSq(const LineSegment& s1, const LineSegment& s2)
 
 Plane::Plane(const Vector3& normal, float d)
 	:mNormal(normal)
-	, mD(d)
+	,mD(d)
 {
 }
 
@@ -286,7 +302,7 @@ bool Intersect(const AABB& a, const AABB& b)
 
 bool Intersect(const Capsule& a, const Capsule& b)
 {
-	float distSq = LineSegment::MinDistSq(a.mSegment,
+	float distSq = LineSegment::MinDistSq(a.mSegment, 
 		b.mSegment);
 	float sumRadii = a.mRadius + b.mRadius;
 	return distSq <= (sumRadii * sumRadii);
@@ -345,7 +361,7 @@ bool Intersect(const LineSegment& l, const Plane& p, float& outT)
 	{
 		// The only way they intersect is if start
 		// is a point on the plane (P dot N) == d
-		if (Math::NearZero(Vector3::Dot(l.mStart, p.mNormal)
+		if (Math::NearZero(Vector3::Dot(l.mStart, p.mNormal) 
 			- p.mD))
 		{
 			return true;
@@ -417,13 +433,13 @@ bool Intersect(const LineSegment& l, const AABB& b, float& outT,
 		tValues);
 	TestSidePlane(l.mStart.z, l.mEnd.z, b.mMax.z, Vector3::UnitZ,
 		tValues);
-
+	
 	// Sort the t values in ascending order
 	std::sort(tValues.begin(), tValues.end(), [](
 		const std::pair<float, Vector3>& a,
 		const std::pair<float, Vector3>& b) {
-			return a.first < b.first;
-		});
+		return a.first < b.first;
+	});
 	// Test if the box contains any of these points of intersection
 	Vector3 point;
 	for (auto& t : tValues)

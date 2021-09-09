@@ -1,3 +1,11 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #include "PhysWorld.h"
 #include <algorithm>
 #include "BoxComponent.h"
@@ -11,18 +19,21 @@ PhysWorld::PhysWorld(Game* game)
 bool PhysWorld::SegmentCast(const LineSegment& l, CollisionInfo& outColl)
 {
 	bool collided = false;
-	float closetT = Math::Infinity;
+	// Initialize closestT to infinity, so first
+	// intersection will always update closestT
+	float closestT = Math::Infinity;
 	Vector3 norm;
-
-	for ( auto box : mBoxes)
+	// Test against all boxes
+	for (auto box : mBoxes)
 	{
 		float t;
-
+		// Does the segment intersect with the box?
 		if (Intersect(l, box->GetWorldBox(), t, norm))
 		{
-			if (t < closetT)
+			// Is this closer than previous intersection?
+			if (t < closestT)
 			{
-				closetT = t;
+				closestT = t;
 				outColl.mPoint = l.PointOnSegment(t);
 				outColl.mNormal = norm;
 				outColl.mBox = box;
@@ -34,7 +45,7 @@ bool PhysWorld::SegmentCast(const LineSegment& l, CollisionInfo& outColl)
 	return collided;
 }
 
-void PhysWorld::TestPairwise(std::function<void(class Actor*, class Actor*)> f)
+void PhysWorld::TestPairwise(std::function<void(Actor*, Actor*)> f)
 {
 	// Naive implementation O(n^2)
 	for (size_t i = 0; i < mBoxes.size(); i++)
@@ -53,14 +64,14 @@ void PhysWorld::TestPairwise(std::function<void(class Actor*, class Actor*)> f)
 	}
 }
 
-void PhysWorld::TestSweepAndPrune(std::function<void(class Actor*, class Actor*)> f)
+void PhysWorld::TestSweepAndPrune(std::function<void(Actor*, Actor*)> f)
 {
 	// Sort by min.x
 	std::sort(mBoxes.begin(), mBoxes.end(),
 		[](BoxComponent* a, BoxComponent* b) {
 			return a->GetWorldBox().mMin.x <
 				b->GetWorldBox().mMin.x;
-		});
+	});
 
 	for (size_t i = 0; i < mBoxes.size(); i++)
 	{

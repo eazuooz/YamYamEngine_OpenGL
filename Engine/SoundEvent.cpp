@@ -1,17 +1,24 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #include "SoundEvent.h"
 #include "AudioSystem.h"
 #include <fmod_studio.hpp>
 
-SoundEvent::SoundEvent(AudioSystem* system, unsigned int id)
+SoundEvent::SoundEvent(class AudioSystem* system, unsigned int id)
 	:mSystem(system)
-	, mID(id)
+	,mID(id)
 {
 }
 
-
 SoundEvent::SoundEvent()
-	: mSystem(nullptr)
-	, mID(0)
+	:mSystem(nullptr)
+	,mID(0)
 {
 }
 
@@ -29,7 +36,7 @@ void SoundEvent::Restart()
 	}
 }
 
-void SoundEvent::Stop(bool allowFadeOut)
+void SoundEvent::Stop(bool allowFadeOut /* true */)
 {
 	auto event = mSystem ? mSystem->GetEventInstance(mID) : nullptr;
 	if (event)

@@ -1,11 +1,18 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #pragma once
 #include "Component.h"
-#include <cstddef>
 
 class MeshComponent : public Component
 {
 public:
-	MeshComponent(class Actor* owner);
+	MeshComponent(class Actor* owner, bool isSkeletal = false);
 	~MeshComponent();
 	// Draw this mesh component
 	virtual void Draw(class Shader* shader);
@@ -15,8 +22,17 @@ public:
 
 	void SetVisible(bool visible) { mVisible = visible; }
 	bool GetVisible() const { return mVisible; }
+
+	bool GetIsSkeletal() const { return mIsSkeletal; }
+
+	TypeID GetType() const override { return TMeshComponent; }
+
+	void LoadProperties(const rapidjson::Value& inObj) override;
+	void SaveProperties(rapidjson::Document::AllocatorType& alloc,
+		rapidjson::Value& inObj) const override;
 protected:
 	class Mesh* mMesh;
 	size_t mTextureIndex;
 	bool mVisible;
+	bool mIsSkeletal;
 };

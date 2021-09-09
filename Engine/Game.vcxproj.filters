@@ -11,12 +11,6 @@
     <Filter Include="Engine\Base">
       <UniqueIdentifier>{7f89f39e-3072-463b-9924-0ff88a7793c2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Component">
-      <UniqueIdentifier>{67144949-3165-452c-aa3a-8c51d18ff86c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Component\AI">
-      <UniqueIdentifier>{a93ce350-3e09-4e2a-8a66-bca007fde86a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Contents">
       <UniqueIdentifier>{45e5a913-9e72-42ab-8006-1d835532190b}</UniqueIdentifier>
     </Filter>
@@ -35,12 +29,6 @@
     <Filter Include="Editor\ImGuizmo">
       <UniqueIdentifier>{68178c53-aecd-43f6-aa71-2ac871d8a399}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Component\Collision">
-      <UniqueIdentifier>{8bd3fe4c-c6b3-4898-98e5-30a4232eabf3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Component\Logic">
-      <UniqueIdentifier>{a1e565c6-ebb7-4eb0-bd40-93a974bcf287}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Mathmetics">
       <UniqueIdentifier>{9527bc66-9de2-4151-a8a2-a25eb781aa0f}</UniqueIdentifier>
     </Filter>
@@ -49,12 +37,6 @@
     </Filter>
     <Filter Include="Engine\Graphics\Shader">
       <UniqueIdentifier>{6493ef47-8030-48bc-aa8d-b757a8c5f870}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Component\3D">
-      <UniqueIdentifier>{7e56ee63-20ad-4cb1-ae86-35e4971c26f3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Component\2D">
-      <UniqueIdentifier>{bd165832-6fdb-494b-a3d5-a3ec090aa57c}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Audio">
       <UniqueIdentifier>{6b64fc80-cd2b-480f-b079-741d1c9e6801}</UniqueIdentifier>
@@ -68,8 +50,29 @@
     <Filter Include="Engine\Actor\Camera">
       <UniqueIdentifier>{08907b3c-276d-4b29-ba69-749718a0c21d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Component\Audip">
+    <Filter Include="Engine\Base\Component">
+      <UniqueIdentifier>{67144949-3165-452c-aa3a-8c51d18ff86c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Component\AI">
+      <UniqueIdentifier>{a93ce350-3e09-4e2a-8a66-bca007fde86a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Component\Collision">
+      <UniqueIdentifier>{8bd3fe4c-c6b3-4898-98e5-30a4232eabf3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Component\Logic">
+      <UniqueIdentifier>{a1e565c6-ebb7-4eb0-bd40-93a974bcf287}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Component\3D">
+      <UniqueIdentifier>{7e56ee63-20ad-4cb1-ae86-35e4971c26f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Component\2D">
+      <UniqueIdentifier>{bd165832-6fdb-494b-a3d5-a3ec090aa57c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Component\Audip">
       <UniqueIdentifier>{f81f5f32-8580-4e01-b39e-5552bbf0eccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\UI">
+      <UniqueIdentifier>{a6805f01-2a85-4050-9007-0efa0110530e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -89,10 +92,10 @@
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="AIComponent.cpp">
-      <Filter>Engine\Component\AI</Filter>
+      <Filter>Engine\Base\Component\AI</Filter>
     </ClCompile>
     <ClCompile Include="AIState.cpp">
-      <Filter>Engine\Component\AI</Filter>
+      <Filter>Engine\Base\Component\AI</Filter>
     </ClCompile>
     <ClCompile Include="imGui\imgui.cpp">
       <Filter>Editor\ImGui</Filter>
@@ -115,35 +118,26 @@
     <ClCompile Include="imGui\imgui_widgets.cpp">
       <Filter>Editor\ImGui</Filter>
     </ClCompile>
-    <ClCompile Include="Asteroid.cpp">
-      <Filter>Contents\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Laser.cpp">
-      <Filter>Contents\2D</Filter>
-    </ClCompile>
-    <ClCompile Include="Ship.cpp">
-      <Filter>Contents\2D</Filter>
-    </ClCompile>
     <ClCompile Include="Editor.cpp">
       <Filter>Editor</Filter>
     </ClCompile>
     <ClCompile Include="CircleComponent.cpp">
-      <Filter>Engine\Component\Collision</Filter>
+      <Filter>Engine\Base\Component\Collision</Filter>
     </ClCompile>
     <ClCompile Include="AnimSpriteComponent.cpp">
-      <Filter>Engine\Component\2D</Filter>
+      <Filter>Engine\Base\Component\2D</Filter>
     </ClCompile>
     <ClCompile Include="SpriteComponent.cpp">
-      <Filter>Engine\Component\2D</Filter>
+      <Filter>Engine\Base\Component\2D</Filter>
     </ClCompile>
     <ClCompile Include="BGSpriteComponent.cpp">
-      <Filter>Engine\Component\2D</Filter>
+      <Filter>Engine\Base\Component\2D</Filter>
     </ClCompile>
     <ClCompile Include="InputComponent.cpp">
-      <Filter>Engine\Component\Logic</Filter>
+      <Filter>Engine\Base\Component\Logic</Filter>
     </ClCompile>
     <ClCompile Include="MoveComponent.cpp">
-      <Filter>Engine\Component\Logic</Filter>
+      <Filter>Engine\Base\Component\Logic</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
       <Filter>Engine\Mathmetics</Filter>
@@ -158,10 +152,7 @@
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="MeshComponent.cpp">
-      <Filter>Engine\Component\3D</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaneActor.cpp">
-      <Filter>Engine\Actor</Filter>
+      <Filter>Engine\Base\Component\3D</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>Engine\Base</Filter>
@@ -179,15 +170,6 @@
       <Filter>Engine</Filter>
     </ClCompile>
     <ClCompile Include="FollowActor.cpp">
-      <Filter>Engine\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSActor.cpp">
-      <Filter>Engine\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="OrbitActor.cpp">
-      <Filter>Engine\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="SplineActor.cpp">
       <Filter>Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="CameraActor.cpp">
@@ -209,25 +191,70 @@
       <Filter>Engine\Actor\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Collision.cpp">
-      <Filter>Engine\Component\Collision</Filter>
+      <Filter>Engine\Base\Component\Collision</Filter>
     </ClCompile>
     <ClCompile Include="BoxComponent.cpp">
-      <Filter>Engine\Component\Collision</Filter>
+      <Filter>Engine\Base\Component\Collision</Filter>
     </ClCompile>
     <ClCompile Include="PhysWorld.cpp">
       <Filter>Engine\System</Filter>
     </ClCompile>
     <ClCompile Include="AudioComponent.cpp">
-      <Filter>Engine\Component\Audip</Filter>
+      <Filter>Engine\Base\Component\Audip</Filter>
     </ClCompile>
     <ClCompile Include="BallActor.cpp">
       <Filter>Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="BallMove.cpp">
+      <Filter>Engine\Base\Component\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="UIScreen.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetComponent.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneTransform.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogBox.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="GBuffer.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="MirrorCamera.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLightComponent.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletalMeshComponent.cpp">
       <Filter>Main</Filter>
     </ClCompile>
     <ClCompile Include="TargetActor.cpp">
-      <Filter>Main</Filter>
+      <Filter>Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneActor.cpp">
+      <Filter>Engine\Actor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,10 +271,10 @@
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="AIState.h">
-      <Filter>Engine\Component\AI</Filter>
+      <Filter>Engine\Base\Component\AI</Filter>
     </ClInclude>
     <ClInclude Include="AIComponent.h">
-      <Filter>Engine\Component\AI</Filter>
+      <Filter>Engine\Base\Component\AI</Filter>
     </ClInclude>
     <ClInclude Include="imGui\imconfig.h">
       <Filter>Editor\ImGui</Filter>
@@ -273,35 +300,26 @@
     <ClInclude Include="imGui\imstb_truetype.h">
       <Filter>Editor\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Asteroid.h">
-      <Filter>Contents\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Laser.h">
-      <Filter>Contents\2D</Filter>
-    </ClInclude>
-    <ClInclude Include="Ship.h">
-      <Filter>Contents\2D</Filter>
-    </ClInclude>
     <ClInclude Include="Editor.h">
       <Filter>Editor</Filter>
     </ClInclude>
     <ClInclude Include="CircleComponent.h">
-      <Filter>Engine\Component\Collision</Filter>
+      <Filter>Engine\Base\Component\Collision</Filter>
     </ClInclude>
     <ClInclude Include="AnimSpriteComponent.h">
-      <Filter>Engine\Component\2D</Filter>
+      <Filter>Engine\Base\Component\2D</Filter>
     </ClInclude>
     <ClInclude Include="SpriteComponent.h">
-      <Filter>Engine\Component\2D</Filter>
+      <Filter>Engine\Base\Component\2D</Filter>
     </ClInclude>
     <ClInclude Include="BGSpriteComponent.h">
-      <Filter>Engine\Component\2D</Filter>
+      <Filter>Engine\Base\Component\2D</Filter>
     </ClInclude>
     <ClInclude Include="InputComponent.h">
-      <Filter>Engine\Component\Logic</Filter>
+      <Filter>Engine\Base\Component\Logic</Filter>
     </ClInclude>
     <ClInclude Include="MoveComponent.h">
-      <Filter>Engine\Component\Logic</Filter>
+      <Filter>Engine\Base\Component\Logic</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
       <Filter>Engine\Mathmetics</Filter>
@@ -316,10 +334,7 @@
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="MeshComponent.h">
-      <Filter>Engine\Component\3D</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaneActor.h">
-      <Filter>Engine\Actor</Filter>
+      <Filter>Engine\Base\Component\3D</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>Engine\Base</Filter>
@@ -337,15 +352,6 @@
       <Filter>Engine</Filter>
     </ClInclude>
     <ClInclude Include="FollowActor.h">
-      <Filter>Engine\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSActor.h">
-      <Filter>Engine\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="OrbitActor.h">
-      <Filter>Engine\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="SplineActor.h">
       <Filter>Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="CameraActor.h">
@@ -367,22 +373,46 @@
       <Filter>Engine\Actor\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Collision.h">
-      <Filter>Engine\Component\Collision</Filter>
+      <Filter>Engine\Base\Component\Collision</Filter>
     </ClInclude>
     <ClInclude Include="BoxComponent.h">
-      <Filter>Engine\Component\Collision</Filter>
+      <Filter>Engine\Base\Component\Collision</Filter>
     </ClInclude>
     <ClInclude Include="PhysWorld.h">
       <Filter>Engine\System</Filter>
     </ClInclude>
     <ClInclude Include="AudioComponent.h">
-      <Filter>Engine\Component\Audip</Filter>
+      <Filter>Engine\Base\Component\Audip</Filter>
     </ClInclude>
     <ClInclude Include="BallActor.h">
       <Filter>Engine\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="BallMove.h" />
-    <ClInclude Include="TargetActor.h" />
+    <ClInclude Include="BallMove.h">
+      <Filter>Engine\Base\Component\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="UIScreen.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h" />
+    <ClInclude Include="TargetComponent.h" />
+    <ClInclude Include="Skeleton.h" />
+    <ClInclude Include="Animation.h" />
+    <ClInclude Include="BoneTransform.h" />
+    <ClInclude Include="DialogBox.h" />
+    <ClInclude Include="GBuffer.h" />
+    <ClInclude Include="HUD.h" />
+    <ClInclude Include="LevelLoader.h" />
+    <ClInclude Include="MatrixPalette.h" />
+    <ClInclude Include="MirrorCamera.h" />
+    <ClInclude Include="PauseMenu.h" />
+    <ClInclude Include="PointLightComponent.h" />
+    <ClInclude Include="SkeletalMeshComponent.h" />
+    <ClInclude Include="TargetActor.h">
+      <Filter>Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneActor.h">
+      <Filter>Engine\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag">
@@ -401,6 +431,21 @@
       <Filter>Engine\Graphics\Shader</Filter>
     </None>
     <None Include="Shaders\Phong.vert">
+      <Filter>Engine\Graphics\Shader</Filter>
+    </None>
+    <None Include="Shaders\GBufferGlobal.frag">
+      <Filter>Engine\Graphics\Shader</Filter>
+    </None>
+    <None Include="Shaders\GBufferGlobal.vert">
+      <Filter>Engine\Graphics\Shader</Filter>
+    </None>
+    <None Include="Shaders\GBufferPointLight.frag">
+      <Filter>Engine\Graphics\Shader</Filter>
+    </None>
+    <None Include="Shaders\GBufferWrite.frag">
+      <Filter>Engine\Graphics\Shader</Filter>
+    </None>
+    <None Include="Shaders\Skinned.vert">
       <Filter>Engine\Graphics\Shader</Filter>
     </None>
   </ItemGroup>

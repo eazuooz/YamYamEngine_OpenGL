@@ -7,22 +7,33 @@
 // ----------------------------------------------------------------
 
 #include "FollowActor.h"
-#include "MeshComponent.h"
+#include "SkeletalMeshComponent.h"
 #include "Game.h"
 #include "Renderer.h"
 #include "FollowCamera.h"
 #include "MoveComponent.h"
+#include "MirrorCamera.h"
+#include "LevelLoader.h"
 
 FollowActor::FollowActor(Game* game)
 	:Actor(game)
+	,mMoving(false)
 {
-	mMeshComp = new MeshComponent(this);
-	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/RacingCar.gpmesh"));
+	mMeshComp = new SkeletalMeshComponent(this);
+	mMeshComp->SetMesh(game->GetRenderer()->GetMesh("Assets/CatWarrior.gpmesh"));
+	mMeshComp->SetSkeleton(game->GetSkeleton("Assets/CatWarrior.gpskel"));
+	mMeshComp->PlayAnimation(game->GetAnimation("Assets/CatActionIdle.gpanim"));
 	SetPosition(Vector3(0.0f, 0.0f, -100.0f));
 
 	mMoveComp = new MoveComponent(this);
 	mCameraComp = new FollowCamera(this);
 	mCameraComp->SnapToIdeal();
+
+	// Add a component for the mirror camera
+	MirrorCamera* mirror = new MirrorCamera(this);
+	mirror->SnapToIdeal();
+
+	game->SetFollowActor(this);
 }
 
 void FollowActor::ActorInput(const uint8_t* keys)
@@ -47,21 +58,35 @@ void FollowActor::ActorInput(const uint8_t* keys)
 		angularSpeed += Math::Pi;
 	}
 
+	// Did we just start moving?
+	if (!mMoving && !Math::NearZero(forwardSpeed))
+	{
+		mMoving = true;
+		mMeshComp->PlayAnimation(GetGame()->GetAnimation("Assets/CatRunSprint.gpanim"), 1.25f);
+	}
+	// Or did we just stop moving?
+	else if (mMoving && Math::NearZero(forwardSpeed))
+	{
+		mMoving = false;
+		mMeshComp->PlayAnimation(GetGame()->GetAnimation("Assets/CatActionIdle.gpanim"));
+	}
 	mMoveComp->SetForwardSpeed(forwardSpeed);
 	mMoveComp->SetAngularSpeed(angularSpeed);
-
-	// Adjust horizontal distance of camera based on speed
-	if (!Math::NearZero(forwardSpeed))
-	{
-		mCameraComp->SetHorzDist(500.0f);
-	}
-	else
-	{
-		mCameraComp->SetHorzDist(350.0f);
-	}
 }
 
 void FollowActor::SetVisible(bool visible)
 {
 	mMeshComp->SetVisible(visible);
+}
+
+void FollowActor::LoadProperties(const rapidjson::Value& inObj)
+{
+	Actor::LoadProperties(inObj);
+	JsonHelper::GetBool(inObj, "moving", mMoving);
+}
+
+void FollowActor::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObj) const
+{
+	Actor::SaveProperties(alloc, inObj);
+	JsonHelper::AddBool(alloc, inObj, "moving", mMoving);
 }

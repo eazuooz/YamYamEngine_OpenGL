@@ -1,3 +1,11 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #include "Math.h"
 
 const Vector2 Vector2::Zero(0.0f, 0.0f);
@@ -68,12 +76,8 @@ Vector3 Vector3::TransformWithPerspDiv(const Vector3& vec, const Matrix4& mat, f
 		vec.z * mat.mat[2][1] + w * mat.mat[3][1];
 	retVal.z = vec.x * mat.mat[0][2] + vec.y * mat.mat[1][2] +
 		vec.z * mat.mat[2][2] + w * mat.mat[3][2];
-
-	//언프로젝트 행렬을 NDC에 곱하면 W 요솟값이 변경된다.
-	//이 요솟값을 w로 나눠서 w요소를 1로 되돌루 있도록 재 정규화가 필요하다.
 	float transformedW = vec.x * mat.mat[0][3] + vec.y * mat.mat[1][3] +
 		vec.z * mat.mat[2][3] + w * mat.mat[3][3];
-	
 	if (!Math::NearZero(Math::Abs(transformedW)))
 	{
 		transformedW = 1.0f / transformedW;
@@ -139,7 +143,7 @@ void Matrix4::Invert()
 	tmp[9] = src[10] * src[12];
 	tmp[10] = src[8] * src[13];
 	tmp[11] = src[9] * src[12];
-
+	
 	dst[0] = tmp[0] * src[5] + tmp[3] * src[6] + tmp[4] * src[7];
 	dst[0] -= tmp[1] * src[5] + tmp[2] * src[6] + tmp[5] * src[7];
 	dst[1] = tmp[1] * src[4] + tmp[6] * src[6] + tmp[9] * src[7];
@@ -156,7 +160,7 @@ void Matrix4::Invert()
 	dst[6] -= tmp[2] * src[0] + tmp[7] * src[1] + tmp[10] * src[3];
 	dst[7] = tmp[4] * src[0] + tmp[9] * src[1] + tmp[10] * src[2];
 	dst[7] -= tmp[5] * src[0] + tmp[8] * src[1] + tmp[11] * src[2];
-
+	
 	tmp[0] = src[2] * src[7];
 	tmp[1] = src[3] * src[6];
 	tmp[2] = src[1] * src[7];
@@ -169,7 +173,7 @@ void Matrix4::Invert()
 	tmp[9] = src[2] * src[4];
 	tmp[10] = src[0] * src[5];
 	tmp[11] = src[1] * src[4];
-
+	
 	dst[8] = tmp[0] * src[13] + tmp[3] * src[14] + tmp[4] * src[15];
 	dst[8] -= tmp[1] * src[13] + tmp[2] * src[14] + tmp[5] * src[15];
 	dst[9] = tmp[1] * src[12] + tmp[6] * src[14] + tmp[9] * src[15];
@@ -186,10 +190,10 @@ void Matrix4::Invert()
 	dst[14] -= tmp[10] * src[11] + tmp[2] * src[8] + tmp[7] * src[9];
 	dst[15] = tmp[10] * src[10] + tmp[4] * src[8] + tmp[9] * src[9];
 	dst[15] -= tmp[8] * src[9] + tmp[11] * src[10] + tmp[5] * src[8];
-
+	
 	// Calculate determinant
 	det = src[0] * dst[0] + src[1] * dst[1] + src[2] * dst[2] + src[3] * dst[3];
-
+	
 	// Inverse of matrix is divided by determinant
 	det = 1 / det;
 	for (int j = 0; j < 16; j++)
@@ -210,7 +214,7 @@ void Matrix4::Invert()
 Matrix4 Matrix4::CreateFromQuaternion(const class Quaternion& q)
 {
 	float mat[4][4];
-
+	
 	mat[0][0] = 1.0f - 2.0f * q.y * q.y - 2.0f * q.z * q.z;
 	mat[0][1] = 2.0f * q.x * q.y + 2.0f * q.w * q.z;
 	mat[0][2] = 2.0f * q.x * q.z - 2.0f * q.w * q.y;

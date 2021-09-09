@@ -1,27 +1,40 @@
-#pragma once
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
 
+#pragma once
 class VertexArray
 {
 public:
-	VertexArray(const float* verts, unsigned int numVerts,
+	// Different supported vertex layouts
+	enum Layout
+	{
+		PosNormTex,
+		PosNormSkinTex
+	};
+
+	VertexArray(const void* verts, unsigned int numVerts, Layout layout,
 		const unsigned int* indices, unsigned int numIndices);
 	~VertexArray();
 
-	// Activate this vertex array (so we can draw it)
 	void SetActive();
-
 	unsigned int GetNumIndices() const { return mNumIndices; }
 	unsigned int GetNumVerts() const { return mNumVerts; }
+
+	static unsigned int GetVertexSize(VertexArray::Layout layout);
 private:
-	// 버텍스 버퍼에 존재하는 버텍스의 수
+	// How many vertices in the vertex buffer?
 	unsigned int mNumVerts;
-	// 인덱스 버퍼에 존재하는 인데스의 수
+	// How many indices in the index buffer
 	unsigned int mNumIndices;
-	// 버텍스 버퍼의 OPENGL ID
+	// OpenGL ID of the vertex buffer
 	unsigned int mVertexBuffer;
-	// 인덱스 버퍼의 OPENGL ID
+	// OpenGL ID of the index buffer
 	unsigned int mIndexBuffer;
-	// 버택스 배열 객체의 OPNGL ID
+	// OpenGL ID of the vertex array object
 	unsigned int mVertexArray;
 };
-

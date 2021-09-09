@@ -1,15 +1,31 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #include "Actor.h"
 #include "Game.h"
 #include "Component.h"
-#include <algorithm>
+#include "LevelLoader.h"
+
+const char* Actor::TypeNames[NUM_ACTOR_TYPES] = {
+	"Actor",
+	"BallActor",
+	"FollowActor",
+	"PlaneActor",
+	"TargetActor",
+};
 
 Actor::Actor(Game* game)
 	:mState(EActive)
-	, mPosition(Vector3::Zero)
-	, mRotation(Quaternion::Identity)
-	, mScale(1.0f)
-	, mGame(game)
-	, mRecomputeWorldTransform(true)
+	,mPosition(Vector3::Zero)
+	,mRotation(Quaternion::Identity)
+	,mScale(1.0f)
+	,mGame(game)
+	,mRecomputeTransform(true)
 {
 	mGame->AddActor(this);
 }
@@ -29,12 +45,12 @@ void Actor::Update(float deltaTime)
 {
 	if (mState == EActive)
 	{
-		ComputeWorldTransform();
-
+		if (mRecomputeTransform)
+		{
+			ComputeWorldTransform();
+		}
 		UpdateComponents(deltaTime);
 		UpdateActor(deltaTime);
-
-		ComputeWorldTransform();
 	}
 }
 
@@ -69,6 +85,21 @@ void Actor::ActorInput(const uint8_t* keyState)
 
 }
 
+void Actor::ComputeWorldTransform()
+{
+	mRecomputeTransform = false;
+	// Scale, then rotate, then translate
+	mWorldTransform = Matrix4::CreateScale(mScale);
+	mWorldTransform *= Matrix4::CreateFromQuaternion(mRotation);
+	mWorldTransform *= Matrix4::CreateTranslation(mPosition);
+
+	// Inform components world transform updated
+	for (auto comp : mComponents)
+	{
+		comp->OnUpdateWorldTransform();
+	}
+}
+
 void Actor::RotateToNewForward(const Vector3& forward)
 {
 	// Figure out difference between original (unit x) and new
@@ -90,24 +121,6 @@ void Actor::RotateToNewForward(const Vector3& forward)
 		Vector3 axis = Vector3::Cross(Vector3::UnitX, forward);
 		axis.Normalize();
 		SetRotation(Quaternion(axis, angle));
-	}
-}
-
-void Actor::ComputeWorldTransform()
-{
-	if (mRecomputeWorldTransform)
-	{
-		mRecomputeWorldTransform = false;
-		// Scale, then rotate, then translate
-		mWorldTransform = Matrix4::CreateScale(mScale);
-		mWorldTransform *= Matrix4::CreateFromQuaternion(mRotation);
-		mWorldTransform *= Matrix4::CreateTranslation(mPosition);
-
-		// Inform components world transform updated
-		for (auto comp : mComponents)
-		{
-			comp->OnUpdateWorldTransform();
-		}
 	}
 }
 
@@ -138,4 +151,49 @@ void Actor::RemoveComponent(Component* component)
 	{
 		mComponents.erase(iter);
 	}
+}
+
+void Actor::LoadProperties(const rapidjson::Value& inObj)
+{
+	// Use strings for different states
+	std::string state;
+	if (JsonHelper::GetString(inObj, "state", state))
+	{
+		if (state == "active")
+		{
+			SetState(EActive);
+		}
+		else if (state == "paused")
+		{
+			SetState(EPaused);
+		}
+		else if (state == "dead")
+		{
+			SetState(EDead);
+		}
+	}
+
+	// Load position, rotation, and scale, and compute transform
+	JsonHelper::GetVector3(inObj, "position", mPosition);
+	JsonHelper::GetQuaternion(inObj, "rotation", mRotation);
+	JsonHelper::GetFloat(inObj, "scale", mScale);
+	ComputeWorldTransform();
+}
+
+void Actor::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson::Value& inObj) const
+{
+	std::string state = "active";
+	if (mState == EPaused)
+	{
+		state = "paused";
+	}
+	else if (mState == EDead)
+	{
+		state = "dead";
+	}
+
+	JsonHelper::AddString(alloc, inObj, "state", state);
+	JsonHelper::AddVector3(alloc, inObj, "position", mPosition);
+	JsonHelper::AddQuaternion(alloc, inObj, "rotation", mRotation);
+	JsonHelper::AddFloat(alloc, inObj, "scale", mScale);
 }

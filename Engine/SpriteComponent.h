@@ -1,3 +1,11 @@
+// ----------------------------------------------------------------
+// From Game Programming in C++ by Sanjay Madhav
+// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
+// 
+// Released under the BSD License
+// See LICENSE in root directory for full details.
+// ----------------------------------------------------------------
+
 #pragma once
 #include "Component.h"
 #include "SDL/SDL.h"
@@ -18,6 +26,12 @@ public:
 
 	void SetVisible(bool visible) { mVisible = visible; }
 	bool GetVisible() const { return mVisible; }
+
+	TypeID GetType() const override { return TSpriteComponent; }
+
+	void LoadProperties(const rapidjson::Value& inObj) override;
+	void SaveProperties(rapidjson::Document::AllocatorType& alloc,
+		rapidjson::Value& inObj) const override;
 protected:
 	class Texture* mTexture;
 	int mDrawOrder;
@@ -25,4 +39,3 @@ protected:
 	int mTexHeight;
 	bool mVisible;
 };
-
