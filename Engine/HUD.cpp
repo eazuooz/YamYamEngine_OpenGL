@@ -66,8 +66,10 @@ void HUD::Draw(Shader* shader)
 	// Draw the mirror (bottom left)
 	
 	
+	
 	Texture* mirror = mGame->GetRenderer()->GetMirrorTexture();
 	DrawTexture(shader, mirror, Vector2(-350.0f, -250.0f), 1.0f, true);
+	
 	
 	//Texture* tex = mGame->GetRenderer()->GetGBuffer()->GetTexture(GBuffer::EDiffuse);
 	//DrawTexture(shader, tex, Vector2(-450.0f, -350.0f), 1.0f, true);
