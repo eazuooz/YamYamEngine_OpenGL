@@ -74,6 +74,9 @@
     <Filter Include="Engine\UI">
       <UniqueIdentifier>{a6805f01-2a85-4050-9007-0efa0110530e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game">
+      <UniqueIdentifier>{2903893d-df79-4fca-b2bc-c3ccee651cd8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
@@ -166,9 +169,6 @@
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="FollowActor.cpp">
       <Filter>Engine\Actor</Filter>
     </ClCompile>
@@ -211,50 +211,53 @@
     <ClCompile Include="UIScreen.cpp">
       <Filter>Engine\UI</Filter>
     </ClCompile>
-    <ClCompile Include="Font.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetComponent.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="BoneTransform.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="DialogBox.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="GBuffer.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="HUD.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="LevelLoader.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="MirrorCamera.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="PauseMenu.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="PointLightComponent.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
-    <ClCompile Include="SkeletalMeshComponent.cpp">
-      <Filter>Main</Filter>
-    </ClCompile>
     <ClCompile Include="TargetActor.cpp">
       <Filter>Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="PlaneActor.cpp">
       <Filter>Engine\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="SkeletalMeshComponent.cpp">
+      <Filter>Engine\Base\Component\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GBuffer.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="BoneTransform.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="HUD.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="DialogBox.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PauseMenu.cpp">
+      <Filter>Engine\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PointLightComponent.cpp">
+      <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetComponent.cpp">
+      <Filter>Engine\Base\Component\Logic</Filter>
+    </ClCompile>
+    <ClCompile Include="MirrorCamera.cpp">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelLoader.cpp">
+      <Filter>Game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -348,9 +351,6 @@
     <ClInclude Include="AudioSystem.h">
       <Filter>Engine\System</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="FollowActor.h">
       <Filter>Engine\Actor</Filter>
     </ClInclude>
@@ -393,25 +393,56 @@
     <ClInclude Include="UIScreen.h">
       <Filter>Engine\UI</Filter>
     </ClInclude>
-    <ClInclude Include="Font.h" />
-    <ClInclude Include="TargetComponent.h" />
-    <ClInclude Include="Skeleton.h" />
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="BoneTransform.h" />
-    <ClInclude Include="DialogBox.h" />
-    <ClInclude Include="GBuffer.h" />
-    <ClInclude Include="HUD.h" />
-    <ClInclude Include="LevelLoader.h" />
-    <ClInclude Include="MatrixPalette.h" />
-    <ClInclude Include="MirrorCamera.h" />
-    <ClInclude Include="PauseMenu.h" />
-    <ClInclude Include="PointLightComponent.h" />
-    <ClInclude Include="SkeletalMeshComponent.h" />
     <ClInclude Include="TargetActor.h">
       <Filter>Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="PlaneActor.h">
       <Filter>Engine\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="SkeletalMeshComponent.h">
+      <Filter>Engine\Base\Component\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="GBuffer.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="BoneTransform.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="DialogBox.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="HUD.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseMenu.h">
+      <Filter>Engine\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MatrixPalette.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="PointLightComponent.h">
+      <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetComponent.h">
+      <Filter>Engine\Base\Component\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="MirrorCamera.h">
+      <Filter>Engine\Actor\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelLoader.h">
+      <Filter>Game</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Game</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
