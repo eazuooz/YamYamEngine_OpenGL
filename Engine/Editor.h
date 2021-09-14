@@ -11,7 +11,7 @@ public:
 	Editor(); 
 	~Editor();
 
-	static void InitGui(SDL_Window* window, void* sdl_gl_context, const char* glslVersion, Game* game);
+	static void InitializeGui(SDL_Window* window, void* sdl_gl_context, const char* glslVersion, Game* game);
 	static void Render();
 	static void RenderDrawData();
 	static void ShutDown();

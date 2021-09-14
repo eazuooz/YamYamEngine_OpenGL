@@ -15,7 +15,7 @@ Editor::~Editor()
 {
 }
 
-void Editor::InitGui(SDL_Window* window, void* sdl_gl_context, const char* glslVersion, Game* game)
+void Editor::InitializeGui(SDL_Window* window, void* sdl_gl_context, const char* glslVersion, Game* game)
 {
 	mWindow = window;
 	mSdlGLContext = sdl_gl_context;

@@ -1,11 +1,3 @@
-// ----------------------------------------------------------------
-// From Game Programming in C++ by Sanjay Madhav
-// Copyright (C) 2017 Sanjay Madhav. All rights reserved.
-// 
-// Released under the BSD License
-// See LICENSE in root directory for full details.
-// ----------------------------------------------------------------
-
 #include "Renderer.h"
 #include "Texture.h"
 #include "Mesh.h"
@@ -20,6 +12,7 @@
 #include "SkeletalMeshComponent.h"
 #include "GBuffer.h"
 #include "PointLightComponent.h"
+#include "Editor.h"
 
 Renderer::Renderer(Game* game)
 	:mGame(game)
@@ -47,8 +40,8 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 	// Use the core OpenGL profile
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
 	// Specify version 3.3
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
+	SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 6);
 	// Request a color buffer with 8-bits per RGBA channel
 	SDL_GL_SetAttribute(SDL_GL_RED_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_GREEN_SIZE, 8);
@@ -70,7 +63,7 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 
 	// Create an OpenGL context
 	mContext = SDL_GL_CreateContext(mWindow);
-
+	const char* glsl_version = (char*)glGetString(GL_VERSION);
 	// Initialize GLEW
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
@@ -113,11 +106,16 @@ bool Renderer::Initialize(float screenWidth, float screenHeight)
 	// Load point light mesh
 	mPointLightMesh = GetMesh("Assets/PointLight.gpmesh");
 
+	
+	Editor::InitializeGui(mWindow, mContext, glsl_version, mGame );
+
 	return true;
 }
 
 void Renderer::Shutdown()
 {
+	Editor::ShutDown();
+
 	// Get rid of any render target textures, if they exist
 	if (mMirrorTexture != nullptr)
 	{
@@ -166,6 +164,10 @@ void Renderer::UnloadData()
 
 void Renderer::Draw()
 {
+	// Editor render
+	Editor::Render();
+
+
 	//Draw to the mirror texture first
 	Draw3DScene(mMirrorBuffer, mMirrorView, mProjection, 1.0f);
 	// Draw the 3D scene to the G-buffer
@@ -199,6 +201,10 @@ void Renderer::Draw()
 	{
 		ui->Draw(mSpriteShader);
 	}
+
+
+	// Editor render draw data
+	Editor::RenderDrawData();
 
 	// Swap the buffers
 	SDL_GL_SwapWindow(mWindow);
