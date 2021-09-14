@@ -51,34 +51,31 @@ void HUD::Draw(Shader* shader)
 	//DrawTexture(shader, cross, Vector2::Zero, 2.0f);
 	
 	// Radar
-	const Vector2 cRadarPos(-390.0f, 275.0f);
-	DrawTexture(shader, mRadar, cRadarPos, 1.0f);
-	// Blips
-	for (Vector2& blip : mBlips)
-	{
-		DrawTexture(shader, mBlipTex, cRadarPos + blip, 1.0f);
-	}
+	//const Vector2 cRadarPos(-390.0f, 275.0f);
+	//DrawTexture(shader, mRadar, cRadarPos, 1.0f);
+	//// Blips
+	//for (Vector2& blip : mBlips)
+	//{
+	//	DrawTexture(shader, mBlipTex, cRadarPos + blip, 1.0f);
+	//}
 	// Radar arrow
-	DrawTexture(shader, mRadarArrow, cRadarPos);
+	//DrawTexture(shader, mRadarArrow, cRadarPos);
 	
-	//// Health bar
-	//DrawTexture(shader, mHealthBar, Vector2(-350.0f, -350.0f));
-	// Draw the mirror (bottom left)
-	
-	
-	
+	//Draw Debug Gbuffer Texture
 	Texture* mirror = mGame->GetRenderer()->GetMirrorTexture();
-	DrawTexture(shader, mirror, Vector2(-350.0f, -250.0f), 1.0f, true);
-	
-	
-	//Texture* tex = mGame->GetRenderer()->GetGBuffer()->GetTexture(GBuffer::EDiffuse);
-	//DrawTexture(shader, tex, Vector2(-450.0f, -350.0f), 1.0f, true);
+	Vector2 screenPos(-(mGame->GetRenderer()->GetScreenWidth() / 2)
+		, (mGame->GetRenderer()->GetScreenHeight() / 2));
+	screenPos.x += (mirror->GetWidth() / 5) * 0.5f;
+	screenPos.y -= (mirror->GetHeight() / 5) * 0.5f;
 
-	//Texture* tex = mGame->GetRenderer()->GetGBuffer()->GetTexture(GBuffer::ENormal);
-	//DrawTexture(shader, tex, Vector2::Zero, 1.0f, true);
+	DrawTexture(shader, mirror, screenPos, 0.20f, true);
+	for (int i = 0; i < GBuffer::NUM_GBUFFER_TEXTURES; i++)
+	{
+		screenPos.x += (mirror->GetWidth() / 5);
 
-	//Texture* tex = mGame->GetRenderer()->GetGBuffer()->GetTexture(GBuffer::EWorldPos);
-	//DrawTexture(shader, tex, Vector2::Zero, 1.0f, true);
+		Texture* tex = mGame->GetRenderer()->GetGBuffer()->GetTexture((GBuffer::Type)i);
+		DrawTexture(shader, tex, screenPos, 0.20f, true);
+	}
 }
 
 void HUD::AddTargetComponent(TargetComponent* tc)

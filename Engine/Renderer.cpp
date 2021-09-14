@@ -167,7 +167,7 @@ void Renderer::UnloadData()
 void Renderer::Draw()
 {
 	//Draw to the mirror texture first
-	Draw3DScene(mMirrorBuffer, mMirrorView, mProjection, 0.25f);
+	Draw3DScene(mMirrorBuffer, mMirrorView, mProjection, 1.0f);
 	// Draw the 3D scene to the G-buffer
 	Draw3DScene(mGBuffer->GetBufferID(), mView, mProjection, 1.0f, false);
 	// Set the frame buffer back to zero (screen's frame buffer)
@@ -374,15 +374,13 @@ void Renderer::Draw3DScene(unsigned int framebuffer, const Matrix4& view, const 
 
 bool Renderer::CreateMirrorTarget()
 {
-
-
 	// Generate a frame buffer for the mirror texture
 	glGenFramebuffers(1, &mMirrorBuffer);
 	glBindFramebuffer(GL_FRAMEBUFFER, mMirrorBuffer);
 
 	// Create the texture we'll use for rendering
-	int width = static_cast<int>(mScreenWidth) / 4;
-	int height = static_cast<int>(mScreenHeight) / 4;
+	int width = static_cast<int>(mScreenWidth);
+	int height = static_cast<int>(mScreenHeight);
 	mMirrorTexture = new Texture();
 	mMirrorTexture->CreateForRendering(width, height, GL_RGB);
 
