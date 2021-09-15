@@ -13,6 +13,7 @@
 #include "Component.h"
 #include "Transform.h"
 
+class Game;
 class Actor
 {
 public:
@@ -36,7 +37,7 @@ public:
 		EDead
 	};
 
-	Actor(class Game* game);
+	Actor(Game* game);
 	virtual ~Actor();
 
 	bool Init();
@@ -51,7 +52,6 @@ public:
 	void RenderUpdate();
 	void RenderPostUpdate();
 	void Stop();
-
 	
 	// Updates all the components attached to the actor (not overridable)
 	void UpdateComponents(float deltaTime);
@@ -64,27 +64,22 @@ public:
 
 	// Transform Getters/setters
 	Transform* GetTransform() { return mTransform; }
+	Game* GetGame() { return mGame; }
 
-	// Getters/setters
+	
 	const Vector3& GetPosition() const { return mPosition; }
 	void SetPosition(const Vector3& pos) { mPosition = pos; mRecomputeTransform = true; }
 	float GetScale() const { return mScale; }
 	void SetScale(float scale) { mScale = scale; mRecomputeTransform = true; }
 	const Quaternion& GetRotation() const { return mRotation; }
 	void SetRotation(const Quaternion& rotation) { mRotation = rotation;   mRecomputeTransform = true; }
-	
 	void ComputeWorldTransform();
 	const Matrix4& GetWorldTransform() const { return mWorldTransform; }
-
 	Vector3 GetForward() const { return Vector3::Transform(Vector3::UnitX, mRotation); }
 	Vector3 GetRight() const { return Vector3::Transform(Vector3::UnitY, mRotation); }
-
 	void RotateToNewForward(const Vector3& forward);
-
 	State GetState() const { return mState; }
 	void SetState(State state) { mState = state; }
-
-	class Game* GetGame() { return mGame; }
 
 
 	// Add/remove components
@@ -138,9 +133,11 @@ public:
 	const std::vector<Component*>& GetComponents() const { return mComponents; }
 private:
 	// Actor's state
+	Game* mGame;
 	State mState;
-
 	Transform* mTransform;
+	
+	std::vector<Component*> mComponents;
 
 	// Transform
 	Matrix4 mWorldTransform;
@@ -149,6 +146,4 @@ private:
 	float mScale;
 	bool mRecomputeTransform;
 
-	std::vector<Component*> mComponents;
-	class Game* mGame;
 };

@@ -426,9 +426,9 @@ void Game::LoadData()
 	mMusicEvent = mAudioSystem->PlayEvent("event:/Music");
 
 	// Enable relative mouse mode for camera look
-	SDL_SetRelativeMouseMode(SDL_TRUE);
+	//SDL_SetRelativeMouseMode(SDL_TRUE);
 	// Make an initial call to get relative to clear out
-	SDL_GetRelativeMouseState(nullptr, nullptr);
+	//SDL_GetRelativeMouseState(nullptr, nullptr);
 }
 
 void Game::UnloadData()

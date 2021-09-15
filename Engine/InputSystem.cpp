@@ -113,6 +113,8 @@ bool InputSystem::Initialize()
     memset(mState.Controller.mPrevButtons, 0,
         SDL_CONTROLLER_BUTTON_MAX);
 
+    //SDL_ShowCursor(SDL_ENABLE);
+
     return true;
 }
 
