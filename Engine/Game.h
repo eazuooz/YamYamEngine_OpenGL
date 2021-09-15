@@ -112,4 +112,6 @@ private:
 	SoundEvent mMusicEvent;
 
 	bool mIsRunning;
+
+	float deltaTime;
 };

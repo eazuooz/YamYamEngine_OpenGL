@@ -39,8 +39,20 @@ public:
 	Actor(class Game* game);
 	virtual ~Actor();
 
+	bool Init();
+	void Start();
+	void PreUpdate(float deltaTime);
+	
 	// Update function called from Game (not overridable)
 	void Update(float deltaTime);
+
+	void PostUpdate(float deltaTime);
+	void RenderPreUpdate();
+	void RenderUpdate();
+	void RenderPostUpdate();
+	void Stop();
+
+	
 	// Updates all the components attached to the actor (not overridable)
 	void UpdateComponents(float deltaTime);
 	// Any actor-specific update code (overridable)

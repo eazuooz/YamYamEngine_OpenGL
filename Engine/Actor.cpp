@@ -45,7 +45,25 @@ Actor::~Actor()
 	}
 }
 
-void Actor::Update(float deltaTime)
+bool Actor::Init()
+{
+	for (auto comp : mComponents)
+	{
+		comp->init();
+	}
+
+	return true;
+}
+
+void Actor::Start()
+{
+	for (auto comp : mComponents)
+	{
+		comp->start();
+	}
+}
+
+void Actor::PreUpdate(float deltaTime)
 {
 	if (mState == EActive)
 	{
@@ -53,8 +71,54 @@ void Actor::Update(float deltaTime)
 		{
 			ComputeWorldTransform();
 		}
+	}
+}
+
+void Actor::Update(float deltaTime)
+{
+	if (mState == EActive)
+	{
 		UpdateComponents(deltaTime);
+	}
+}
+
+void Actor::PostUpdate(float deltaTime)
+{
+	if (mState == EActive)
+	{
 		UpdateActor(deltaTime);
+	}
+}
+
+void Actor::RenderPreUpdate()
+{
+	for (auto comp : mComponents)
+	{
+		comp->renderPreUpdate();
+	}
+}
+
+void Actor::RenderUpdate()
+{
+	for (auto comp : mComponents)
+	{
+		comp->renderUpdate();
+	}
+}
+
+void Actor::RenderPostUpdate()
+{
+	for (auto comp : mComponents)
+	{
+		comp->renderPostUpdate();
+	}
+}
+
+void Actor::Stop()
+{
+	for (auto comp : mComponents)
+	{
+		comp->stop();
 	}
 }
 

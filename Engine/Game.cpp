@@ -37,6 +37,7 @@ Game::Game()
 	, mPhysWorld(nullptr)
 	, mGameState(EGameplay)
 	, mUpdatingActors(false)
+	, deltaTime(0.0f)
 {
 
 }
@@ -267,40 +268,51 @@ void Game::RunLoop()
 
 bool Game::init()
 {
-	return false;
+	for (auto actor : mActors)
+	{
+		actor->Init();
+	}
+
+	return true;
 }
 
 void Game::start()
 {
+	for (auto actor : mActors)
+	{
+		actor->Start();
+	}
 }
 
 void Game::PreUpdate()
 {
 	ProcessInput();
 
-}
-
-void Game::update()
-{
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
 	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16))
 		;
 
-	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
+	deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f;
 	if (deltaTime > 0.05f)
 	{
 		deltaTime = 0.05f;
 	}
 	mTicksCount = SDL_GetTicks();
 
+}
+
+void Game::update()
+{
 	if (mGameState == EGameplay)
 	{
 		// Update all actors
 		mUpdatingActors = true;
 		for (auto actor : mActors)
 		{
+			actor->PreUpdate(deltaTime);
 			actor->Update(deltaTime);
+			actor->PostUpdate(deltaTime);
 		}
 		mUpdatingActors = false;
 
@@ -329,6 +341,11 @@ void Game::update()
 		}
 	}
 
+
+}
+
+void Game::postUpdate()
+{
 	// Update audio system
 	mAudioSystem->Update(deltaTime);
 
@@ -356,25 +373,37 @@ void Game::update()
 	}
 }
 
-void Game::postUpdate()
-{
-}
-
 void Game::renderPreUpdate()
 {
+	for (auto actor : mActors)
+	{
+		actor->RenderPreUpdate();
+	}
 }
 
 void Game::renderUpdate()
 {
+	for (auto actor : mActors)
+	{
+		actor->RenderUpdate();
+	}
 	GenerateOutput();
 }
 
 void Game::renderPostUpdate()
 {
+	for (auto actor : mActors)
+	{
+		actor->RenderPostUpdate();
+	}
 }
 
 void Game::stop()
 {
+	for (auto actor : mActors)
+	{
+		actor->Stop();
+	}
 	UnloadData();
 }
 
