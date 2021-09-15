@@ -257,7 +257,9 @@ void AudioSystem::Update(float deltaTime)
 	// Remove done event instances from map
 	for (auto id : done)
 	{
+
 		mEventInstances.erase(id);
+		
 	}
 
 	// Update FMOD
@@ -345,4 +347,5 @@ FMOD::Studio::EventInstance* AudioSystem::GetEventInstance(unsigned int id)
 		event = iter->second;
 	}
 	return event;
+	
 }

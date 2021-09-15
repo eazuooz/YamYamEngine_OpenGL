@@ -49,6 +49,9 @@ public:
 	// Any actor-specific input code (overridable)
 	virtual void ActorInput(const uint8_t* keyState);
 
+	// Transform Getters/setters
+	Transform* GetTransform() { return mTransform; }
+
 	// Getters/setters
 	const Vector3& GetPosition() const { return mPosition; }
 	void SetPosition(const Vector3& pos) { mPosition = pos; mRecomputeTransform = true; }
@@ -74,7 +77,18 @@ public:
 	// Add/remove components
 	void AddComponent(class Component* component);
 	void RemoveComponent(class Component* component);
-
+	template<class T> T* GetComponent()
+	{
+		T* component;
+		for (auto& c : components_)
+		{
+			if ((component = dynamic_cast<T*>) != nullptr)
+			{
+				return component;
+			}
+		}
+		return nullptr;
+	}
 	// Load/Save
 	virtual void LoadProperties(const rapidjson::Value& inObj);
 	virtual void SaveProperties(rapidjson::Document::AllocatorType& alloc,
@@ -112,6 +126,8 @@ public:
 private:
 	// Actor's state
 	State mState;
+
+	Transform* mTransform;
 
 	// Transform
 	Matrix4 mWorldTransform;

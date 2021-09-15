@@ -18,6 +18,7 @@ class Game
 {
 public:
 	Game();
+	~Game();
 	bool Initialize();
 	void RunLoop();
 	void Shutdown();

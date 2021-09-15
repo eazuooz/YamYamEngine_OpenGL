@@ -139,6 +139,14 @@ void Renderer::Shutdown()
 	delete mSpriteShader;
 	mMeshShader->Unload();
 	delete mMeshShader;
+	mSkinnedShader->Unload();
+	delete mSkinnedShader;
+	mGGlobalShader->Unload();
+	delete mGGlobalShader;
+	mGPointLightShader->Unload();
+	delete mGPointLightShader;
+	
+
 	SDL_GL_DeleteContext(mContext);
 	SDL_DestroyWindow(mWindow);
 }

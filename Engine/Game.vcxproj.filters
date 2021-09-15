@@ -29,9 +29,6 @@
     <Filter Include="Editor\ImGuizmo">
       <UniqueIdentifier>{68178c53-aecd-43f6-aa71-2ac871d8a399}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Mathmetics">
-      <UniqueIdentifier>{9527bc66-9de2-4151-a8a2-a25eb781aa0f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Graphics">
       <UniqueIdentifier>{7fb57423-e798-4ea7-92da-3e4563e673d8}</UniqueIdentifier>
     </Filter>
@@ -46,9 +43,6 @@
     </Filter>
     <Filter Include="Engine\Actor">
       <UniqueIdentifier>{c70bed52-4545-4b66-ba6d-24efa2f06f5b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Actor\Camera">
-      <UniqueIdentifier>{08907b3c-276d-4b29-ba69-749718a0c21d}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Base\Component">
       <UniqueIdentifier>{67144949-3165-452c-aa3a-8c51d18ff86c}</UniqueIdentifier>
@@ -68,14 +62,26 @@
     <Filter Include="Engine\Base\Component\2D">
       <UniqueIdentifier>{bd165832-6fdb-494b-a3d5-a3ec090aa57c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Base\Component\Audip">
-      <UniqueIdentifier>{f81f5f32-8580-4e01-b39e-5552bbf0eccb}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\UI">
       <UniqueIdentifier>{a6805f01-2a85-4050-9007-0efa0110530e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{2903893d-df79-4fca-b2bc-c3ccee651cd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Contents\Camera">
+      <UniqueIdentifier>{f7689f94-a991-4a8b-a40f-465bcfc62b88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Component\Audio">
+      <UniqueIdentifier>{f81f5f32-8580-4e01-b39e-5552bbf0eccb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Base\Memory">
+      <UniqueIdentifier>{be2e58bc-62d0-4073-a61f-77565b489036}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util">
+      <UniqueIdentifier>{6da35cb1-da21-44b3-a9cf-e5f3aaf90775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Util\Mathmetics">
+      <UniqueIdentifier>{9527bc66-9de2-4151-a8a2-a25eb781aa0f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -143,10 +149,10 @@
       <Filter>Engine\Base\Component\Logic</Filter>
     </ClCompile>
     <ClCompile Include="Math.cpp">
-      <Filter>Engine\Mathmetics</Filter>
+      <Filter>Util\Mathmetics</Filter>
     </ClCompile>
     <ClCompile Include="Random.cpp">
-      <Filter>Engine\Mathmetics</Filter>
+      <Filter>Util\Mathmetics</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>Engine\Graphics</Filter>
@@ -169,27 +175,6 @@
     <ClCompile Include="AudioSystem.cpp">
       <Filter>Engine\System</Filter>
     </ClCompile>
-    <ClCompile Include="FollowActor.cpp">
-      <Filter>Engine\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraActor.cpp">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraComponent.cpp">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="FollowCamera.cpp">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="FPSCamera.cpp">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="OrbitCamera.cpp">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClCompile>
-    <ClCompile Include="SplineCamera.cpp">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Collision.cpp">
       <Filter>Engine\Base\Component\Collision</Filter>
     </ClCompile>
@@ -200,22 +185,13 @@
       <Filter>Engine\System</Filter>
     </ClCompile>
     <ClCompile Include="AudioComponent.cpp">
-      <Filter>Engine\Base\Component\Audip</Filter>
-    </ClCompile>
-    <ClCompile Include="BallActor.cpp">
-      <Filter>Engine\Actor</Filter>
+      <Filter>Engine\Base\Component\Audio</Filter>
     </ClCompile>
     <ClCompile Include="BallMove.cpp">
       <Filter>Engine\Base\Component\Logic</Filter>
     </ClCompile>
     <ClCompile Include="UIScreen.cpp">
       <Filter>Engine\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="TargetActor.cpp">
-      <Filter>Engine\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="PlaneActor.cpp">
-      <Filter>Engine\Actor</Filter>
     </ClCompile>
     <ClCompile Include="SkeletalMeshComponent.cpp">
       <Filter>Engine\Base\Component\3D</Filter>
@@ -250,14 +226,53 @@
     <ClCompile Include="TargetComponent.cpp">
       <Filter>Engine\Base\Component\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="MirrorCamera.cpp">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClCompile>
     <ClCompile Include="Game.cpp">
       <Filter>Game</Filter>
     </ClCompile>
     <ClCompile Include="LevelLoader.cpp">
       <Filter>Game</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraComponent.cpp">
+      <Filter>Engine\Base\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowCamera.cpp">
+      <Filter>Contents\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="FPSCamera.cpp">
+      <Filter>Contents\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="MirrorCamera.cpp">
+      <Filter>Contents\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="OrbitCamera.cpp">
+      <Filter>Contents\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="SplineCamera.cpp">
+      <Filter>Contents\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="BallActor.cpp">
+      <Filter>Contents\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraActor.cpp">
+      <Filter>Contents\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="FollowActor.cpp">
+      <Filter>Contents\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="PlaneActor.cpp">
+      <Filter>Contents\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="TargetActor.cpp">
+      <Filter>Contents\3D</Filter>
+    </ClCompile>
+    <ClCompile Include="imGui\imgui_stl.cpp">
+      <Filter>Editor\ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="ref_ptr.cpp">
+      <Filter>Main</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>Main</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -325,10 +340,10 @@
       <Filter>Engine\Base\Component\Logic</Filter>
     </ClInclude>
     <ClInclude Include="Random.h">
-      <Filter>Engine\Mathmetics</Filter>
+      <Filter>Util\Mathmetics</Filter>
     </ClInclude>
     <ClInclude Include="Math.h">
-      <Filter>Engine\Mathmetics</Filter>
+      <Filter>Util\Mathmetics</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>Engine\Graphics</Filter>
@@ -351,27 +366,6 @@
     <ClInclude Include="AudioSystem.h">
       <Filter>Engine\System</Filter>
     </ClInclude>
-    <ClInclude Include="FollowActor.h">
-      <Filter>Engine\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraActor.h">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraComponent.h">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FollowCamera.h">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="FPSCamera.h">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="OrbitCamera.h">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="SplineCamera.h">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="Collision.h">
       <Filter>Engine\Base\Component\Collision</Filter>
     </ClInclude>
@@ -382,22 +376,13 @@
       <Filter>Engine\System</Filter>
     </ClInclude>
     <ClInclude Include="AudioComponent.h">
-      <Filter>Engine\Base\Component\Audip</Filter>
-    </ClInclude>
-    <ClInclude Include="BallActor.h">
-      <Filter>Engine\Actor</Filter>
+      <Filter>Engine\Base\Component\Audio</Filter>
     </ClInclude>
     <ClInclude Include="BallMove.h">
       <Filter>Engine\Base\Component\Logic</Filter>
     </ClInclude>
     <ClInclude Include="UIScreen.h">
       <Filter>Engine\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="TargetActor.h">
-      <Filter>Engine\Actor</Filter>
-    </ClInclude>
-    <ClInclude Include="PlaneActor.h">
-      <Filter>Engine\Actor</Filter>
     </ClInclude>
     <ClInclude Include="SkeletalMeshComponent.h">
       <Filter>Engine\Base\Component\3D</Filter>
@@ -435,15 +420,53 @@
     <ClInclude Include="TargetComponent.h">
       <Filter>Engine\Base\Component\Logic</Filter>
     </ClInclude>
-    <ClInclude Include="MirrorCamera.h">
-      <Filter>Engine\Actor\Camera</Filter>
-    </ClInclude>
     <ClInclude Include="LevelLoader.h">
       <Filter>Game</Filter>
     </ClInclude>
     <ClInclude Include="Game.h">
       <Filter>Game</Filter>
     </ClInclude>
+    <ClInclude Include="CameraComponent.h">
+      <Filter>Engine\Base\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowCamera.h">
+      <Filter>Contents\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="FPSCamera.h">
+      <Filter>Contents\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="MirrorCamera.h">
+      <Filter>Contents\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="OrbitCamera.h">
+      <Filter>Contents\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="SplineCamera.h">
+      <Filter>Contents\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="BallActor.h">
+      <Filter>Contents\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraActor.h">
+      <Filter>Contents\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="FollowActor.h">
+      <Filter>Contents\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="PlaneActor.h">
+      <Filter>Contents\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="TargetActor.h">
+      <Filter>Contents\3D</Filter>
+    </ClInclude>
+    <ClInclude Include="Referenced.h">
+      <Filter>Engine\Base\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="imGui\imgui_stl.h">
+      <Filter>Editor\ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="ref_ptr.h" />
+    <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag">

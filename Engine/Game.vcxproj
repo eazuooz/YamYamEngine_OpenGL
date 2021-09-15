@@ -50,6 +50,7 @@
     <ClCompile Include="imGui\imgui_draw.cpp" />
     <ClCompile Include="imGui\imgui_impl_opengl3.cpp" />
     <ClCompile Include="imGui\imgui_impl_sdl.cpp" />
+    <ClCompile Include="imGui\imgui_stl.cpp" />
     <ClCompile Include="imGui\imgui_tables.cpp" />
     <ClCompile Include="imGui\imgui_widgets.cpp" />
     <ClCompile Include="InputComponent.cpp" />
@@ -67,6 +68,7 @@
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="PointLightComponent.cpp" />
     <ClCompile Include="Random.cpp" />
+    <ClCompile Include="ref_ptr.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkeletalMeshComponent.cpp" />
@@ -77,6 +79,7 @@
     <ClCompile Include="TargetActor.cpp" />
     <ClCompile Include="TargetComponent.cpp" />
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UIScreen.cpp" />
     <ClCompile Include="VertexArray.cpp" />
   </ItemGroup>
@@ -112,6 +115,7 @@
     <ClInclude Include="imGui\imgui_impl_opengl3.h" />
     <ClInclude Include="imGui\imgui_impl_sdl.h" />
     <ClInclude Include="imGui\imgui_internal.h" />
+    <ClInclude Include="imGui\imgui_stl.h" />
     <ClInclude Include="imGui\imstb_rectpack.h" />
     <ClInclude Include="imGui\imstb_textedit.h" />
     <ClInclude Include="imGui\imstb_truetype.h" />
@@ -130,6 +134,8 @@
     <ClInclude Include="PlaneActor.h" />
     <ClInclude Include="PointLightComponent.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="Referenced.h" />
+    <ClInclude Include="ref_ptr.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SkeletalMeshComponent.h" />
@@ -140,6 +146,7 @@
     <ClInclude Include="TargetActor.h" />
     <ClInclude Include="TargetComponent.h" />
     <ClInclude Include="Texture.h" />
+    <ClInclude Include="Transform.h" />
     <ClInclude Include="UIScreen.h" />
     <ClInclude Include="VertexArray.h" />
   </ItemGroup>

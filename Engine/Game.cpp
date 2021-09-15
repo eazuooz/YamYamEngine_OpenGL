@@ -41,6 +41,11 @@ Game::Game()
 	
 }
 
+Game::~Game()
+{
+	
+}
+
 bool Game::Initialize()
 {
 	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0)
@@ -367,7 +372,7 @@ void Game::Shutdown()
 {
 	UnloadData();
 	TTF_Quit();
-	delete mPhysWorld;
+	
 	if (mRenderer)
 	{
 		mRenderer->Shutdown();
@@ -377,6 +382,18 @@ void Game::Shutdown()
 		mAudioSystem->Shutdown();
 	}
 	SDL_Quit();
+
+	delete mRenderer;
+	mRenderer = nullptr;
+
+	delete mInputSystem;
+	mInputSystem = nullptr;
+
+	delete mAudioSystem;
+	mAudioSystem = nullptr;
+
+	delete mPhysWorld;
+	mPhysWorld = nullptr;
 }
 
 void Game::AddActor(Actor* actor)

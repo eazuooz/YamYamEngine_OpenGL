@@ -2,12 +2,15 @@
 #include "Math.h"
 #include <rapidjson/document.h>
 
-class Component
+class Transform;
+class Actor;
+class Component //: public Object
 {
 public:
 	enum TypeID
 	{
 		TComponent = 0,
+		TTransformComponent,
 		TAudioComponent,
 		TBallMove,
 		TBoxComponent,
@@ -38,7 +41,19 @@ public:
 	// Called when world transform changes
 	virtual void OnUpdateWorldTransform();
 
-	class Actor* GetOwner() { return mOwner; }
+	//test
+	virtual void init() {};
+	virtual void start() {};
+	virtual void preUpdate() {};
+	virtual void update(float dt) {};
+	virtual void postUpdate() {};
+	virtual void renderPreUpdate() {};
+	virtual void renderUpdate() {};
+	virtual void renderPostUpdate() {};
+	virtual void stop() {};
+	//virtual void onSceneChanged();
+
+	Actor* GetOwner() { return mOwner; }
 	int GetUpdateOrder() const { return mUpdateOrder; }
 
 	virtual TypeID GetType() const = 0;
@@ -50,7 +65,7 @@ public:
 
 	// Create a component with specified properties
 	template <typename T>
-	static Component* Create(class Actor* actor, const rapidjson::Value& inObj)
+	static Component* Create(Actor* actor, const rapidjson::Value& inObj)
 	{
 		// Dynamically allocate component of type T
 		T* t = new T(actor);
@@ -58,9 +73,25 @@ public:
 		t->LoadProperties(inObj);
 		return t;
 	}
+
+	//template<class T> T* getComponent()
+	//{
+	//	T* component;
+	//	for (auto& c : mOwner->GetComponents())
+	//	{
+	//		if ((component = dynamic_cast<T*>) != nullptr)
+	//		{
+	//			return component;
+	//		}
+	//	}
+	//	return nullptr;
+	//}
+
 protected:
 	// Owning actor
-	class Actor* mOwner;
+	Actor* mOwner;
 	// Update order of component
 	int mUpdateOrder;
+	// Transform component
+	Transform* mTransform;
 };

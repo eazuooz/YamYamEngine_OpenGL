@@ -34,6 +34,7 @@ HUD::HUD(Game* game)
 
 HUD::~HUD()
 {
+	
 }
 
 void HUD::Update(float deltaTime)
