@@ -122,10 +122,10 @@ void HUD::UpdateRadar(float deltaTime)
 	mBlips.clear();
 	
 	// Convert player position to radar coordinates (x forward, z up)
-	Vector3 playerPos = mGame->GetPlayer()->GetPosition();
+	Vector3 playerPos = mGame->GetPlayer()->GetTransform()->GetPosition();
 	Vector2 playerPos2D(playerPos.y, playerPos.x);
 	// Ditto for player forward
-	Vector3 playerForward = mGame->GetPlayer()->GetForward();
+	Vector3 playerForward = mGame->GetPlayer()->GetTransform()->GetForward();
 	Vector2 playerForward2D(playerForward.x, playerForward.y);
 	
 	// Use atan2 to get rotation of radar
@@ -136,7 +136,7 @@ void HUD::UpdateRadar(float deltaTime)
 	// Get positions of blips
 	for (auto tc : mTargetComps)
 	{
-		Vector3 targetPos = tc->GetOwner()->GetPosition();
+		Vector3 targetPos = tc->GetOwner()->GetTransform()->GetPosition();
 		Vector2 actorPos2D(targetPos.y, targetPos.x);
 		
 		// Calculate vector between player and target

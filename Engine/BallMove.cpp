@@ -24,8 +24,8 @@ void BallMove::Update(float deltaTime)
 	PhysWorld* phys = mOwner->GetGame()->GetPhysWorld();
 
 	// Construct segment in direction of travel
-	Vector3 start = mOwner->GetPosition();
-	Vector3 dir = mOwner->GetForward();
+	Vector3 start = mOwner->GetTransform()->GetPosition();
+	Vector3 dir = mOwner->GetTransform()->GetForward();
 	Vector3 end = start + dir * segmentLength;
 	// Create line segment
 	LineSegment l(start, end);
@@ -35,7 +35,7 @@ void BallMove::Update(float deltaTime)
 	{
 		// If we collided, reflect the ball about the normal
 		dir = Vector3::Reflect(dir, info.mNormal);
-		mOwner->RotateToNewForward(dir);
+		mOwner->GetTransform()->RotateToNewForward(dir);
 		// Did we hit a target?
 		TargetActor* target = dynamic_cast<TargetActor*>(info.mActor);
 		if (target)

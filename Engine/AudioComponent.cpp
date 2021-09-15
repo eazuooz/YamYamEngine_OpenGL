@@ -57,7 +57,9 @@ void AudioComponent::Update(float deltaTime)
 void AudioComponent::OnUpdateWorldTransform()
 {
 	// Update 3D events' world transforms
-	Matrix4 world = mOwner->GetWorldTransform();
+	Matrix4 world = mOwner->GetTransform()->GetWorldTransform();
+	//Matrix4 world2 = mOwner->GetComponent<Transform>()->GetWorldTransform();
+
 	for (auto& event : mEvents3D)
 	{
 		if (event.IsValid())
@@ -75,7 +77,7 @@ SoundEvent AudioComponent::PlayEvent(const std::string& name)
 	{
 		mEvents3D.emplace_back(e);
 		// Set initial 3D attributes
-		e.Set3DAttributes(mOwner->GetWorldTransform());
+		e.Set3DAttributes(mOwner->GetTransform()->GetWorldTransform());
 	}
 	else
 	{

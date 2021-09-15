@@ -23,11 +23,7 @@ const char* Actor::TypeNames[NUM_ACTOR_TYPES] =
 
 Actor::Actor(Game* game)
 	:mState(EActive)
-	,mPosition(Vector3::Zero)
-	,mRotation(Quaternion::Identity)
-	,mScale(1.0f)
 	,mGame(game)
-	,mRecomputeTransform(true)
 {
 	mGame->AddActor(this);
 	
@@ -67,7 +63,7 @@ void Actor::PreUpdate(float deltaTime)
 {
 	if (mState == EActive)
 	{
-		if (mRecomputeTransform)
+		if (mTransform->GetRecomputeTransform())
 		{
 			ComputeWorldTransform();
 		}
@@ -155,40 +151,13 @@ void Actor::ActorInput(const uint8_t* keyState)
 
 void Actor::ComputeWorldTransform()
 {
-	mRecomputeTransform = false;
-	// Scale, then rotate, then translate
-	mWorldTransform = Matrix4::CreateScale(mScale);
-	mWorldTransform *= Matrix4::CreateFromQuaternion(mRotation);
-	mWorldTransform *= Matrix4::CreateTranslation(mPosition);
+	mTransform->ComputeWorldTransform();
+	//GetComponent<Transform>()->ComputeWorldTransform();
 
 	// Inform components world transform updated
 	for (auto comp : mComponents)
 	{
 		comp->OnUpdateWorldTransform();
-	}
-}
-
-void Actor::RotateToNewForward(const Vector3& forward)
-{
-	// Figure out difference between original (unit x) and new
-	float dot = Vector3::Dot(Vector3::UnitX, forward);
-	float angle = Math::Acos(dot);
-	// Facing down X
-	if (dot > 0.9999f)
-	{
-		SetRotation(Quaternion::Identity);
-	}
-	// Facing down -X
-	else if (dot < -0.9999f)
-	{
-		SetRotation(Quaternion(Vector3::UnitZ, Math::Pi));
-	}
-	else
-	{
-		// Rotate about axis from cross product
-		Vector3 axis = Vector3::Cross(Vector3::UnitX, forward);
-		axis.Normalize();
-		SetRotation(Quaternion(axis, angle));
 	}
 }
 
@@ -242,9 +211,17 @@ void Actor::LoadProperties(const rapidjson::Value& inObj)
 	}
 
 	// Load position, rotation, and scale, and compute transform
-	JsonHelper::GetVector3(inObj, "position", mPosition);
-	JsonHelper::GetQuaternion(inObj, "rotation", mRotation);
-	JsonHelper::GetFloat(inObj, "scale", mScale);
+	Vector3 outPos;
+	JsonHelper::GetVector3(inObj, "position", outPos);
+	mTransform->SetPosition(outPos);
+
+	Quaternion outQut;
+	JsonHelper::GetQuaternion(inObj, "rotation", outQut);
+	mTransform->SetRotation(outQut);
+
+	float outScale;
+	JsonHelper::GetFloat(inObj, "scale", outScale);
+	mTransform->SetScale(outScale);
 	ComputeWorldTransform();
 }
 
@@ -261,7 +238,7 @@ void Actor::SaveProperties(rapidjson::Document::AllocatorType& alloc, rapidjson:
 	}
 
 	JsonHelper::AddString(alloc, inObj, "state", state);
-	JsonHelper::AddVector3(alloc, inObj, "position", mPosition);
-	JsonHelper::AddQuaternion(alloc, inObj, "rotation", mRotation);
-	JsonHelper::AddFloat(alloc, inObj, "scale", mScale);
+	JsonHelper::AddVector3(alloc, inObj, "position", mTransform->GetPosition());
+	JsonHelper::AddQuaternion(alloc, inObj, "rotation", mTransform->GetRotation());
+	JsonHelper::AddFloat(alloc, inObj, "scale", mTransform->GetScale());
 }

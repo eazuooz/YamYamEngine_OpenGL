@@ -31,16 +31,16 @@ void BoxComponent::OnUpdateWorldTransform()
 	// Reset to object space box
 	mWorldBox = mObjectBox;
 	// Scale
-	mWorldBox.mMin *= mOwner->GetScale();
-	mWorldBox.mMax *= mOwner->GetScale();
+	mWorldBox.mMin *= mOwner->GetTransform()->GetScale();
+	mWorldBox.mMax *= mOwner->GetTransform()->GetScale();
 	// Rotate (if we want to)
 	if (mShouldRotate)
 	{
-		mWorldBox.Rotate(mOwner->GetRotation());
+		mWorldBox.Rotate(mOwner->GetTransform()->GetRotation());
 	}
 	// Translate
-	mWorldBox.mMin += mOwner->GetPosition();
-	mWorldBox.mMax += mOwner->GetPosition();
+	mWorldBox.mMin += mOwner->GetTransform()->GetPosition();
+	mWorldBox.mMax += mOwner->GetTransform()->GetPosition();
 }
 
 void BoxComponent::LoadProperties(const rapidjson::Value& inObj)

@@ -30,7 +30,7 @@ void SkeletalMeshComponent::Draw(Shader* shader)
 	{
 		// Set the world transform
 		shader->SetMatrixUniform("uWorldTransform", 
-			mOwner->GetWorldTransform());
+			mOwner->GetTransform()->GetWorldTransform());
 		// Set the matrix palette
 		shader->SetMatrixUniforms("uMatrixPalette", &mPalette.mEntry[0], 
 			MAX_SKELETON_BONES);

@@ -34,7 +34,7 @@ void BGSpriteComponent::Draw(Shader* shader)
 			static_cast<float>(mTexHeight),
 			1.0f);
 
-		Matrix4 world = scaleMat * mOwner->GetWorldTransform();
+		Matrix4 world = scaleMat * mOwner->GetTransform()->GetWorldTransform();
 
 		shader->SetMatrixUniform("uWorldTransform", world);
 		mTexture->SetActive();

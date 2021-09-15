@@ -34,7 +34,7 @@ void OrbitCamera::Update(float deltaTime)
 	mUp = Vector3::Transform(mUp, pitch);
 
 	// Compute transform matrix
-	Vector3 target = mOwner->GetPosition();
+	Vector3 target = mOwner->GetTransform()->GetPosition();
 	Vector3 cameraPos = target + mOffset;
 	Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, mUp);
 	SetViewMatrix(view);

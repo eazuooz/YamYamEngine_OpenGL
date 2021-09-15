@@ -22,22 +22,22 @@ void MoveComponent::Update(float deltaTime)
 {
 	if (!Math::NearZero(mAngularSpeed))
 	{
-		Quaternion rot = mOwner->GetRotation();
+		Quaternion rot = mOwner->GetTransform()->GetRotation();
 		float angle = mAngularSpeed * deltaTime;
 		// Create quaternion for incremental rotation
 		// (Rotate about up axis)
 		Quaternion inc(Vector3::UnitZ, angle);
 		// Concatenate old and new quaternion
 		rot = Quaternion::Concatenate(rot, inc);
-		mOwner->SetRotation(rot);
+		mOwner->GetTransform()->SetRotation(rot);
 	}
 	
 	if (!Math::NearZero(mForwardSpeed) || !Math::NearZero(mStrafeSpeed))
 	{
-		Vector3 pos = mOwner->GetPosition();
-		pos += mOwner->GetForward() * mForwardSpeed * deltaTime;
-		pos += mOwner->GetRight() * mStrafeSpeed * deltaTime;
-		mOwner->SetPosition(pos);
+		Vector3 pos = mOwner->GetTransform()->GetPosition();
+		pos += mOwner->GetTransform()->GetForward() * mForwardSpeed * deltaTime;
+		pos += mOwner->GetTransform()->GetRight() * mStrafeSpeed * deltaTime;
+		mOwner->GetTransform()->SetPosition(pos);
 	}
 }
 

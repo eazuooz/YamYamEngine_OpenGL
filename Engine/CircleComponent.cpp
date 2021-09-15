@@ -10,12 +10,12 @@ CircleComponent::CircleComponent(class Actor* owner)
 
 const Vector3& CircleComponent::GetCenter() const
 {
-	return mOwner->GetPosition();
+	return mOwner->GetTransform()->GetPosition();
 }
 
 float CircleComponent::GetRadius() const
 {
-	return mOwner->GetScale() * mRadius;
+	return mOwner->GetTransform()->GetScale() * mRadius;
 }
 
 bool Intersect(const CircleComponent& a, const CircleComponent& b)

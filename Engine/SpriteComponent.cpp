@@ -40,7 +40,7 @@ void SpriteComponent::Draw(Shader* shader)
 			static_cast<float>(mTexHeight),
 			1.0f);
 		
-		Matrix4 world = scaleMat * mOwner->GetWorldTransform();
+		Matrix4 world = scaleMat * mOwner->GetTransform()->GetWorldTransform();
 		
 		// Since all sprites use the same shader/vertices,
 		// the game first sets them active before any sprite draws

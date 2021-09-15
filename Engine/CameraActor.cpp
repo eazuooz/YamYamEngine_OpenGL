@@ -28,8 +28,8 @@ void CameraActor::UpdateActor(float deltaTime)
 		mLastFootstep = 0.5f;
 	}
 	// Compute new camera from this actor
-	Vector3 cameraPos = GetPosition();
-	Vector3 target = GetPosition() + GetForward() * 100.0f;
+	Vector3 cameraPos = GetTransform()->GetPosition();
+	Vector3 target = GetTransform()->GetPosition() + GetTransform()->GetForward() * 100.0f;
 	Vector3 up = Vector3::UnitZ;
 	Matrix4 view = Matrix4::CreateLookAt(cameraPos, target, up);
 	GetGame()->GetRenderer()->SetViewMatrix(view);
