@@ -59,7 +59,7 @@ void AudioComponent::OnUpdateWorldTransform()
 	// Update 3D events' world transforms
 	Matrix4 world = mOwner->GetTransform()->GetWorldTransform();
 	//Matrix4 world2 = mOwner->GetComponent<Transform>()->GetWorldTransform();
-
+	
 	for (auto& event : mEvents3D)
 	{
 		if (event.IsValid())

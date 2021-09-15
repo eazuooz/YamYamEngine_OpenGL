@@ -1,4 +1,5 @@
 #pragma once
+#include <memory>
 #include "Math.h"
 #include <rapidjson/document.h>
 
@@ -26,9 +27,9 @@ public:
 
 		NUM_COMPONENT_TYPES
 	};
-
+	
 	static const char* TypeNames[NUM_COMPONENT_TYPES];
-
+	
 	// Constructor
 	// (the lower the update order, the earlier the component updates)
 	Component(class Actor* owner, int updateOrder = 100);

@@ -68,7 +68,6 @@
     <ClCompile Include="PlaneActor.cpp" />
     <ClCompile Include="PointLightComponent.cpp" />
     <ClCompile Include="Random.cpp" />
-    <ClCompile Include="ref_ptr.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="SkeletalMeshComponent.cpp" />
@@ -135,7 +134,6 @@
     <ClInclude Include="PointLightComponent.h" />
     <ClInclude Include="Random.h" />
     <ClInclude Include="Referenced.h" />
-    <ClInclude Include="ref_ptr.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="SkeletalMeshComponent.h" />
