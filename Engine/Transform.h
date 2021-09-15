@@ -5,9 +5,12 @@
 class Transform : public Component
 {
 public:
-	Transform();
+	Transform(class Actor* owner);
 	~Transform();
 
 	TypeID GetType() const override { return TTransformComponent; }
+
+private:
+
 };
 

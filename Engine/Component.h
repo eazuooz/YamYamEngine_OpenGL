@@ -2,7 +2,7 @@
 #include "Math.h"
 #include <rapidjson/document.h>
 
-class Transform;
+//class Transform;
 class Actor;
 class Component //: public Object
 {
@@ -45,12 +45,13 @@ public:
 	virtual void init() {};
 	virtual void start() {};
 	virtual void preUpdate() {};
-	virtual void update(float dt) {};
+	virtual void update(float deltaTime) {};
 	virtual void postUpdate() {};
 	virtual void renderPreUpdate() {};
 	virtual void renderUpdate() {};
 	virtual void renderPostUpdate() {};
 	virtual void stop() {};
+
 	//virtual void onSceneChanged();
 
 	Actor* GetOwner() { return mOwner; }
@@ -93,5 +94,5 @@ protected:
 	// Update order of component
 	int mUpdateOrder;
 	// Transform component
-	Transform* mTransform;
+	//Transform* mTransform;
 };

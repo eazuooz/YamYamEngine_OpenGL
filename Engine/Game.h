@@ -64,13 +64,22 @@ public:
 
 
 private:
+	bool init();
+	void start();
+	void PreUpdate();
+	void update();
+	void postUpdate();
+	void renderPreUpdate();
+	void renderUpdate();
+	void renderPostUpdate();
+	void stop();
+	
+	void LoadData();
 	void ProcessInput();
 	void HandleKeyPress(int key);
-	void UpdateGame();
 	void GenerateOutput();
-	void LoadData();
 	void UnloadData();
-	
+
 	// All the actors in the game
 	std::vector<class Actor*> mActors;
 	std::vector<class UIScreen*> mUIStack;

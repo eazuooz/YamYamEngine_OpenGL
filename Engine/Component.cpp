@@ -32,7 +32,7 @@ Component::Component(Actor* owner, int updateOrder)
 {
 	// Add to actor's vector of components
 	mOwner->AddComponent(this);
-	mTransform = owner->GetTransform();
+	//mTransform = owner->GetTransform();
 }
 
 Component::~Component()

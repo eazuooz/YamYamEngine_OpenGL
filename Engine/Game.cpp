@@ -31,24 +31,24 @@
 #include "LevelLoader.h"
 
 Game::Game()
-:mIsRunning(true)
-,mRenderer(nullptr)
-,mAudioSystem(nullptr)
-,mPhysWorld(nullptr)
-,mGameState(EGameplay)
-,mUpdatingActors(false)
+	:mIsRunning(true)
+	, mRenderer(nullptr)
+	, mAudioSystem(nullptr)
+	, mPhysWorld(nullptr)
+	, mGameState(EGameplay)
+	, mUpdatingActors(false)
 {
-	
+
 }
 
 Game::~Game()
 {
-	
+
 }
 
 bool Game::Initialize()
 {
-	if (SDL_Init(SDL_INIT_VIDEO|SDL_INIT_AUDIO) != 0)
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO) != 0)
 	{
 		SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
 		return false;
@@ -85,7 +85,7 @@ bool Game::Initialize()
 
 	// Create the physics world
 	mPhysWorld = new PhysWorld(this);
-	
+
 	// Initialize SDL_ttf
 	if (TTF_Init() != 0)
 	{
@@ -96,18 +96,39 @@ bool Game::Initialize()
 	LoadData();
 
 	mTicksCount = SDL_GetTicks();
-	
+
+	init();
+	start();
+
 	return true;
 }
 
-void Game::RunLoop()
+void Game::Shutdown()
 {
-	while (mGameState != EQuit)
+	stop();
+	TTF_Quit();
+
+	if (mRenderer)
 	{
-		ProcessInput();
-		UpdateGame();
-		GenerateOutput();
+		mRenderer->Shutdown();
 	}
+	if (mAudioSystem)
+	{
+		mAudioSystem->Shutdown();
+	}
+	SDL_Quit();
+
+	delete mRenderer;
+	mRenderer = nullptr;
+
+	delete mInputSystem;
+	mInputSystem = nullptr;
+
+	delete mAudioSystem;
+	mAudioSystem = nullptr;
+
+	delete mPhysWorld;
+	mPhysWorld = nullptr;
 }
 
 void Game::ProcessInput()
@@ -119,46 +140,46 @@ void Game::ProcessInput()
 	{
 		switch (event.type)
 		{
-			case SDL_QUIT:
-				mGameState = EQuit;
-				break;
+		case SDL_QUIT:
+			mGameState = EQuit;
+			break;
 			// This fires when a key's initially pressed
-			case SDL_KEYDOWN:
-				if (!event.key.repeat)
-				{
-					if (mGameState == EGameplay)
-					{
-						HandleKeyPress(event.key.keysym.sym);
-					}
-					else if (!mUIStack.empty())
-					{
-						mUIStack.back()->
-							HandleKeyPress(event.key.keysym.sym);
-					}
-				}
-				break;
-			case SDL_MOUSEBUTTONDOWN:
+		case SDL_KEYDOWN:
+			if (!event.key.repeat)
+			{
 				if (mGameState == EGameplay)
 				{
-					HandleKeyPress(event.button.button);
+					HandleKeyPress(event.key.keysym.sym);
 				}
 				else if (!mUIStack.empty())
 				{
 					mUIStack.back()->
-						HandleKeyPress(event.button.button);
+						HandleKeyPress(event.key.keysym.sym);
 				}
-				break;
-			case SDL_MOUSEWHEEL:
-				mInputSystem->ProcessEvent(event);
-				break;
-			default:
-				break;
+			}
+			break;
+		case SDL_MOUSEBUTTONDOWN:
+			if (mGameState == EGameplay)
+			{
+				HandleKeyPress(event.button.button);
+			}
+			else if (!mUIStack.empty())
+			{
+				mUIStack.back()->
+					HandleKeyPress(event.button.button);
+			}
+			break;
+		case SDL_MOUSEWHEEL:
+			mInputSystem->ProcessEvent(event);
+			break;
+		default:
+			break;
 		}
 	}
-	
+
 	mInputSystem->Update();
 	const InputState& state = mInputSystem->GetState();
-	
+
 	const Uint8* keyState = SDL_GetKeyboardState(NULL);
 	if (mGameState == EGameplay)
 	{
@@ -227,7 +248,39 @@ void Game::HandleKeyPress(int key)
 	}
 }
 
-void Game::UpdateGame()
+void Game::RunLoop()
+{
+	while (mGameState != EQuit)
+	{
+
+
+		PreUpdate();
+		update();
+		postUpdate();
+		renderPreUpdate();
+		renderUpdate();
+		renderPostUpdate();
+	}
+}
+
+
+
+bool Game::init()
+{
+	return false;
+}
+
+void Game::start()
+{
+}
+
+void Game::PreUpdate()
+{
+	ProcessInput();
+
+}
+
+void Game::update()
 {
 	// Compute delta time
 	// Wait until 16ms has elapsed since last frame
@@ -275,10 +328,10 @@ void Game::UpdateGame()
 			delete actor;
 		}
 	}
-	
+
 	// Update audio system
 	mAudioSystem->Update(deltaTime);
-	
+
 	// Update UI screens
 	for (auto ui : mUIStack)
 	{
@@ -293,7 +346,7 @@ void Game::UpdateGame()
 	{
 		if ((*iter)->GetState() == UIScreen::EClosing)
 		{
-			delete *iter;
+			delete* iter;
 			iter = mUIStack.erase(iter);
 		}
 		else
@@ -301,6 +354,28 @@ void Game::UpdateGame()
 			++iter;
 		}
 	}
+}
+
+void Game::postUpdate()
+{
+}
+
+void Game::renderPreUpdate()
+{
+}
+
+void Game::renderUpdate()
+{
+	GenerateOutput();
+}
+
+void Game::renderPostUpdate()
+{
+}
+
+void Game::stop()
+{
+	UnloadData();
 }
 
 void Game::GenerateOutput()
@@ -317,7 +392,7 @@ void Game::LoadData()
 
 	// Load the level from file
 	LevelLoader::LoadLevel(this, "Assets/Level3.gplevel");
-	
+
 	// Start music
 	mMusicEvent = mAudioSystem->PlayEvent("event:/Music");
 
@@ -366,34 +441,6 @@ void Game::UnloadData()
 	{
 		delete a.second;
 	}
-}
-
-void Game::Shutdown()
-{
-	UnloadData();
-	TTF_Quit();
-	
-	if (mRenderer)
-	{
-		mRenderer->Shutdown();
-	}
-	if (mAudioSystem)
-	{
-		mAudioSystem->Shutdown();
-	}
-	SDL_Quit();
-
-	delete mRenderer;
-	mRenderer = nullptr;
-
-	delete mInputSystem;
-	mInputSystem = nullptr;
-
-	delete mAudioSystem;
-	mAudioSystem = nullptr;
-
-	delete mPhysWorld;
-	mPhysWorld = nullptr;
 }
 
 void Game::AddActor(Actor* actor)

@@ -9,7 +9,7 @@
 #include "Actor.h"
 #include "Game.h"
 #include "Component.h"
-#include "Transform.h"
+
 #include "LevelLoader.h"
 
 const char* Actor::TypeNames[NUM_ACTOR_TYPES] = 
@@ -31,8 +31,7 @@ Actor::Actor(Game* game)
 {
 	mGame->AddActor(this);
 	
-	//mTransform = new Transform();
-	//AddComponent(mTransform);
+	mTransform = new Transform(this);
 }
 
 Actor::~Actor()

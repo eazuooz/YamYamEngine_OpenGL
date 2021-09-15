@@ -11,6 +11,7 @@
 #include "Math.h"
 #include <rapidjson/document.h>
 #include "Component.h"
+#include "Transform.h"
 
 class Actor
 {
