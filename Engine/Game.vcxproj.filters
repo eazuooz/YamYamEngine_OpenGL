@@ -269,7 +269,7 @@
       <Filter>Editor\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>Main</Filter>
+      <Filter>Engine\Base\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -462,7 +462,9 @@
     <ClInclude Include="imGui\imgui_stl.h">
       <Filter>Editor\ImGui</Filter>
     </ClInclude>
-    <ClInclude Include="Transform.h" />
+    <ClInclude Include="Transform.h">
+      <Filter>Engine\Base\Component</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="Shaders\BasicMesh.frag">
